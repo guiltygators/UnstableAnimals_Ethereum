@@ -1,12 +1,20 @@
 const hre = require("hardhat");
 
 async function main() {
-  const SpaceShibas = await hre.ethers.getContractFactory("SpaceShibas");
-  const spaceShibas = await SpaceShibas.deploy("Space Shibas", "SPACE-SHIBAS", "ipfs://QmYcsZAmYo19UNzZa1knTb8JahT2ymgvyTYszvtzieYerK");
+  const UnstableAnimals = await hre.ethers.getContractFactory("UnstableAnimals");
+  const unstableAnimals = await UnstableAnimals.deploy("Unstable Animals", "UNSTABLE", "https://gateway.pinata.cloud/ipfs/QmeKJxzoc7PhhFn4ccsYtNqFzAAe8F6goSRhnJ6F6wWJBW/");
 
-  await spaceShibas.deployed();
+  const [deployer] = await ethers.getSigners();
+  console.log(
+    "Deploying contracts with the account:",
+    deployer.address
+    );
+  
+  console.log("Account balance:", (await deployer.getBalance()).toString());
+  
+  await unstableAnimals.deployed();
 
-  console.log("SpaceShibas deployed to:", spaceShibas.address);
+  console.log("UnstableAnimals deployed to:", unstableAnimals.address);
 }
 
 main()

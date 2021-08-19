@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from 'react'
 import { utils } from 'ethers'
 import Modal from 'react-modal'
 import AnimateOnChange from 'react-animate-on-change'
-import scientist from './images/scientist-animated.gif'
+import UnstableGIF from './images/UnstableGIF.gif'
 import pixelParty from './images/pixel-party.png'
 import { ReactComponent as MetaMaskLogo } from './images/mm-logo.svg'
 import './MintSection.css'
@@ -10,19 +10,20 @@ import './pixelLoader.css'
 import { createContractStateHook } from "./createContractStateHook";
 import { resolveProvider } from "./resolveProvider";
 import { createContractHelper } from "./createContractHelper";
-import SpaceShibas from './artifacts/contracts/SpaceShibas.sol/SpaceShibas.json'
+import UnstableAnimals from './artifacts/contracts/UnstableAnimals.sol/UnstableAnimals.json'
 import MintGallery from "./MintGallery";
 import {useSmoothScrollTo} from "./useSmoothScrollTo";
 import {useLocalStorage} from './useLocalStorage'
 import {usePrevious} from "./usePrevious";
 
-const SPACE_SHIBAS_ADDRESS = '0xeF81c2C98cb9718003A89908e6bd1a5fA8A098A3'
-const CHAIN_ID = '0x1'
-export const OPENSEA_NAME = 'spaceshibas'
+// cambiar direccion de smart contract
+const UnstableAnimals_ADDRESS = '0x431E857597887411a9d1e25D75eAE05BBBcbb63d'
+const CHAIN_ID = '0x4'
+export const OPENSEA_NAME = 'Unstable Animals'
 
 const provider = resolveProvider()
-const spaceShibas = createContractHelper(SPACE_SHIBAS_ADDRESS, SpaceShibas.abi, provider)
-const useSpaceShibasState = createContractStateHook(spaceShibas.reader)
+const unstableAnimals = createContractHelper(UnstableAnimals_ADDRESS, UnstableAnimals.abi, provider)
+const useUnstableAnimalstate = createContractStateHook(unstableAnimals.reader)
 
 export const APP_STATE = {
   readyToMint: 'READY_TO_MINT',
@@ -44,27 +45,27 @@ function wait(ms) {
 
 function MintSection() {
   const [buyAmount, setBuyAmountValue] = useState(1)
-  const [lastPurchasedShibaIds, setLastPurchasedShibaIds] = useState([])
+  const [lastPurchasedUnstableAnimalsIds, setLastPurchasedUnstableAnimalsIds] = useState([])
   const [appState, setAppState] = useState(APP_STATE.readyToMint)
   const [modalIsOpen, setModalOpen] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
   const [shouldAnimateCount, setShouldAnimateCount] = useState(false)
-  const [hasMintedShibas, setHasMintedShibas] = useLocalStorage('hasMintedShibas', false)
-  const [showViewShibas, setShowViewShibas] = useState(false)
+  const [hasMintedUnstableAnimals, setHasMintedUnstableAnimals] = useLocalStorage('hasMintedUnstableAnimals', false)
+  const [showViewUnstableAnimals, setShowViewUnstableAnimals] = useState(false)
 
-  const loadedNoneMinted = useRef(hasMintedShibas !== true)
+  const loadedNoneMinted = useRef(hasMintedUnstableAnimals !== true)
 
   function disableCountAnimation() {
     setShouldAnimateCount(false)
   }
 
   useEffect(() => {
-    if (hasMintedShibas && loadedNoneMinted.current !== hasMintedShibas) {
-      setShowViewShibas(true)
+    if (hasMintedUnstableAnimals && loadedNoneMinted.current !== hasMintedUnstableAnimals) {
+      setShowViewUnstableAnimals(true)
     }
-  }, [hasMintedShibas, appState])
+  }, [hasMintedUnstableAnimals, appState])
 
-  const [buyPrice] = useSpaceShibasState({
+  const [buyPrice] = useUnstableAnimalstate({
     stateVarName: 'price',
     initialData: utils.parseUnits('0'),
     transformData: (data) => ({
@@ -73,30 +74,33 @@ function MintSection() {
     })
   })
 
-  const [isSaleActive, _, __, refreshIsSaleActive] = useSpaceShibasState('saleEnabled', true)
-  const [shibasMinted, ___, ____, refreshShibasMinted] = useSpaceShibasState({
-    stateVarName: 'shibasMinted',
+  const [isSaleActive, _, __, refreshIsSaleActive] = useUnstableAnimalstate('saleEnabled', true)
+  const [UnstableAnimalsMinted, ___, ____, refreshUnstableAnimalsMinted] = useUnstableAnimalstate({
+    stateVarName: 'UnstableAnimalsMinted',
     transformData: (data) => data.toNumber(),
     swrOptions: { refreshInterval: 6000 },
   })
-  const [maxShibaCount] = useSpaceShibasState({
+  const [maxUnstableAnimalsCount] = useUnstableAnimalstate({
     initialData: utils.parseUnits('10000', 'wei'),
     stateVarName: 'MAX_SUPPLY',
     transformData: (data) => data.toNumber(),
   })
 
-  const allSold = maxShibaCount === shibasMinted
+  let allSold = maxUnstableAnimalsCount === UnstableAnimalsMinted
+  if (!window.ethereum) {
+    allSold = false
+  }
 
-  const shibasMintedPrevious = usePrevious(shibasMinted)
+  const UnstableAnimalsMintedPrevious = usePrevious(UnstableAnimalsMinted)
   useEffect(() => {
     if (
-      shibasMinted !== undefined &&
-      shibasMintedPrevious !== undefined &&
-      shibasMinted !== shibasMintedPrevious
+      UnstableAnimalsMinted !== undefined &&
+      UnstableAnimalsMintedPrevious !== undefined &&
+      UnstableAnimalsMinted !== UnstableAnimalsMintedPrevious
     ) {
       setShouldAnimateCount(true)
     }
-  }, [shibasMinted, shibasMintedPrevious])
+  }, [UnstableAnimalsMinted, UnstableAnimalsMintedPrevious])
 
   useEffect(() => {
     if (!isSaleActive || allSold) {
@@ -121,9 +125,9 @@ function MintSection() {
     setAppState(APP_STATE.readyToMint)
   }
 
-  async function buyShibas() {
+  async function buyUnstableAnimals() {
     setErrorMessage(null)
-    if (!spaceShibas.web3Enabled) {
+    if (!unstableAnimals.web3Enabled) {
       setModalOpen(true)
       return
     }
@@ -133,7 +137,7 @@ function MintSection() {
     let txHash
     try {
       // throw Error('Fake error pre-tx.')
-      const transaction = await spaceShibas.signer.buy(
+      const transaction = await unstableAnimals.signer.buy(
         buyAmount, {
           value: etherAmount,
           gasLimit: `0x${(buyAmount * 180000).toString(16)}`
@@ -142,18 +146,18 @@ function MintSection() {
       txHash = transaction.hash
       // throw Error('Fake error post-tx.')
       setAppState(APP_STATE.waitingForTx)
-      setLastPurchasedShibaIds([])
+      setLastPurchasedUnstableAnimalsIds([])
       // await wait(5000)
       await transaction.wait()
       setAppState(APP_STATE.txSuccess)
       const txReceipt = await provider.getTransactionReceipt(transaction.hash)
       const purchasedIds = txReceipt.logs
-        .map((log) => spaceShibas.interface.parseLog(log))
+        .map((log) => unstableAnimals.interface.parseLog(log))
         .filter((log) => log.name === 'Transfer')
         .map((log) => log.args.tokenId.toNumber())
-      setLastPurchasedShibaIds(purchasedIds)
-      setHasMintedShibas(true)
-      await refreshShibasMinted()
+      setLastPurchasedUnstableAnimalsIds(purchasedIds)
+      setHasMintedUnstableAnimals(true)
+      await refreshUnstableAnimalsMinted()
     } catch (err) {
       refreshIsSaleActive()
       console.error(err)
@@ -182,7 +186,7 @@ function MintSection() {
     switch (appState) {
       case APP_STATE.readyToMint:
         return <button
-          onClick={buyShibas}
+          onClick={buyUnstableAnimals}
         >
           <span className='mint-word' style={formattedEthAmount ? {float: 'left', marginLeft: 8} : {}}>Mint</span>
           {formattedEthAmount ? <span className='mint-price'>({formattedEthAmount})</span> : ''}
@@ -208,7 +212,7 @@ function MintSection() {
           className='sold-out'
           disabled={true}
         >
-          <span className='mint-word'>SOLD OUT!</span>
+          <span className='mint-word'>Sale not started</span>
         </button>
 
       default:
@@ -276,19 +280,20 @@ function MintSection() {
   return (
     <div ref={refToScroll} className="MintSection">
       <div className="mint-content-left">
-        <h1>Find your Space Shibas!</h1>
-        <p>10,000 Space Shibas have wandered off and gotten lost in the vast expanse of the universe. Use the mint button to bring them back down to Earth! Each mint has enough capacity to beam down 10 Space Shibas at a time.</p>
+        <h1>Find your Unstable Animals!</h1>
+        <p>In our latest expedition to the parallel worlds, we found a breach in space. 10,000 unstable animals have crossed to our reality and now live in our blockchain.</p>
+        <p>Use our minting technology to stabilize them in our reality</p>
         <div className="mint-interface">
-          <div className='shibas-minted-wrapper'>
-            {shibasMinted !== undefined && <div className='shibas-minted'>
+          <div className='UnstableAnimals-minted-wrapper'>
+            {UnstableAnimalsMinted !== undefined && <div className='UnstableAnimals-minted'>
               <AnimateOnChange
-                baseClassName='shiba-minted-count'
-                animationClassName='shiba-minted-count--flash'
+                baseClassName='UnstableAnimals-minted-count'
+                animationClassName='UnstableAnimals-minted-count--flash'
                 animate={shouldAnimateCount}
                 onAnimationEnd={disableCountAnimation}
               >
-                {shibasMinted}
-              </AnimateOnChange> / 10,000 SHIBAS&nbsp;MINTED
+                {UnstableAnimalsMinted}
+              </AnimateOnChange> / 10,000 Unstable Animals&nbsp;MINTED
             </div>}
           </div>
           {getMintInput()}
@@ -297,23 +302,23 @@ function MintSection() {
       </div>
 
       <div className="mint-content-right">
-        <img alt='Professor Shiba has no idea what he is doing' src={scientist} />
+        <img src={UnstableGIF} />
       </div>
 
       {errorMessage && errorMessage}
 
       {!(appState === APP_STATE.soldOut) && <MintGallery
         buyAmount={buyAmount}
-        purchasedIds={lastPurchasedShibaIds}
+        purchasedIds={lastPurchasedUnstableAnimalsIds}
         appState={appState}
-        contractAddress={SPACE_SHIBAS_ADDRESS}
+        contractAddress={UnstableAnimals_ADDRESS}
       />}
 
       <div
-        disabled={!showViewShibas}
-        className={showViewShibas ? 'view-my-shibas' : 'view-my-shibas not-minted-yet'}
+        disabled={!showViewUnstableAnimals}
+        className={showViewUnstableAnimals ? 'view-my-UnstableAnimals' : 'view-my-UnstableAnimals not-minted-yet'}
       >
-        <p>View my shibas on:</p>
+        <p>View my UnstableAnimals on:</p>
         <a
           href={`https://opensea.io/${window.ethereum?.selectedAddress}/${OPENSEA_NAME}`}
           target='_blank'
