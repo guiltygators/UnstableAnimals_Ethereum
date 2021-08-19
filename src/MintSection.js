@@ -10,7 +10,7 @@ import './pixelLoader.css'
 import { createContractStateHook } from "./createContractStateHook";
 import { resolveProvider } from "./resolveProvider";
 import { createContractHelper } from "./createContractHelper";
-import UnstableAnimals from './artifacts/contracts/UnstableAnimals.sol/UnstableAnimals.json'
+import UnstableAnimals from './UnstableAnimals.json'
 import MintGallery from "./MintGallery";
 import {useSmoothScrollTo} from "./useSmoothScrollTo";
 import {useLocalStorage} from './useLocalStorage'
