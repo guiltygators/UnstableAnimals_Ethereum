@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+artifacts
 
 # testing
 /coverage
@@ -24,9 +25,8 @@ yarn-error.log*
 
 node_modules
 
-#Hardhat files
+#Hardhat files // moved artifacts to dependencies
 cache
-artifacts
 
 # IDE-specific
 /.idea
