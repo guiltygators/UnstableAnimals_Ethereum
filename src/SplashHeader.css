@@ -1,6 +1,6 @@
 .SplashHeader {
     background-image: url("images/collage_bg.png");
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-attachment: fixed;
     height: 100vh;
