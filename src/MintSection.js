@@ -18,7 +18,7 @@ import {usePrevious} from "./usePrevious";
 
 // cambiar direccion de smart contract
 const UnstableAnimals_ADDRESS = '0x431E857597887411a9d1e25D75eAE05BBBcbb63d'
-const CHAIN_ID = '0x4'
+const CHAIN_ID = '0x1'
 export const OPENSEA_NAME = 'Unstable Animals'
 
 const provider = resolveProvider()
@@ -46,7 +46,9 @@ function wait(ms) {
 function MintSection() {
   const [buyAmount, setBuyAmountValue] = useState(1)
   const [lastPurchasedUnstableAnimalsIds, setLastPurchasedUnstableAnimalsIds] = useState([])
-  const [appState, setAppState] = useState(APP_STATE.readyToMint)
+// temporalmente comento esta linea (volverla a activar luego)
+  // const [appState, setAppState] = useState(APP_STATE.readyToMint)
+  const [appState, setAppState] = useState(APP_STATE.soldOut)
   const [modalIsOpen, setModalOpen] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
   const [shouldAnimateCount, setShouldAnimateCount] = useState(false)
