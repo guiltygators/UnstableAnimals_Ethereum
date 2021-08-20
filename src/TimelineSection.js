@@ -17,7 +17,7 @@ function TimelineSection() {
         <div class="container right">
             <div class="content">
                 <h2>50% minted</h2>
-                <p>Donation to a Freedom of Speech NGO</p>
+                <p>Donation to a Freedom of Speech NGO to be defined with the community</p>
             </div>
         </div>
         <div class="container right">

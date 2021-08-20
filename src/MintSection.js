@@ -314,7 +314,7 @@ function MintSection() {
         contractAddress={UnstableAnimals_ADDRESS}
       />}
 
-      <div
+      {/* <div
         disabled={!showViewUnstableAnimals}
         className={showViewUnstableAnimals ? 'view-my-UnstableAnimals' : 'view-my-UnstableAnimals not-minted-yet'}
       >
@@ -333,7 +333,7 @@ function MintSection() {
         >
           Rarible
         </a>
-      </div>
+      </div> */}
 
       <Modal
         isOpen={modalIsOpen}
