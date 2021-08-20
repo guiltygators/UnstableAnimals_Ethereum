@@ -12,10 +12,10 @@ function FooterSection() {
         
       <div class = "social" > 
 
-          <a href="https://t.me/UnstableAnimals" target='_blank' rel='noreferrer' className="social-icon"><TelegramIcon /></a>
-          <a href="https://discord.gg/FZu7yurFF6" target='_blank' rel='noreferrer' className="social-icon"><DiscordIcon /></a>
+          <a href="https://t.me/joinchat/2T-GN74qV6xhMzZh" target='_blank' rel='noreferrer' className="social-icon"><TelegramIcon /></a>
+          <a href="hhttps://discord.gg/dCX6vqxXNm" target='_blank' rel='noreferrer' className="social-icon"><DiscordIcon /></a>
           <a href="https://twitter.com/UnstableAnimals" target='_blank' rel='noreferrer' className="social-icon"><TwitterIcon /></a>
-          <a href="https://opensea.io/Unstable_Animals" target='_blank' rel='noreferrer' className="social-icon"><OpenSeaIcon style={{marginBottom: 6}} /></a>
+          {/* <a href="https://opensea.io/Unstable_Animals" target='_blank' rel='noreferrer' className="social-icon"><OpenSeaIcon style={{marginBottom: 6}} /></a> */}
 
       </div>
       </div>
