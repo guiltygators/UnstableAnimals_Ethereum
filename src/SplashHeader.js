@@ -28,9 +28,9 @@ function SplashHeader() {
       <a onClick={() => dispatchEvent(scrollToMint)} className="button-1">
         Mint Starts Aug 25
       </a><br />
-      <a href={`https://opensea.io/collection/${OPENSEA_NAME}`} target='_blank' rel='noreferrer' className="button-2">
+      {/* <a href={`https://opensea.io/collection/${OPENSEA_NAME}`} target='_blank' rel='noreferrer' className="button-2">
         VIEW GALLERY
-      </a><br />
+      </a><br /> */}
       <div className="social-icons">
           <a href="https://t.me/joinchat/2T-GN74qV6xhMzZh" target='_blank' rel='noreferrer' className="social-icon"><TelegramIcon /></a>
           <a href="hhttps://discord.gg/dCX6vqxXNm" target='_blank' rel='noreferrer' className="social-icon"><DiscordIcon /></a>

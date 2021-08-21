@@ -2,7 +2,8 @@ const hre = require("hardhat");
 
 async function main() {
   const UnstableAnimals = await hre.ethers.getContractFactory("UnstableAnimals");
-  const unstableAnimals = await UnstableAnimals.deploy("Unstable Animals", "UNSTABLE", "https://gateway.pinata.cloud/ipfs/QmeKJxzoc7PhhFn4ccsYtNqFzAAe8F6goSRhnJ6F6wWJBW/");
+  // const unstableAnimals = await UnstableAnimals.deploy("Unstable Animals", "UNSTABLE", "https://gateway.pinata.cloud/ipfs/QmeKJxzoc7PhhFn4ccsYtNqFzAAe8F6goSRhnJ6F6wWJBW/");
+  const unstableAnimals = await UnstableAnimals.deploy("UnstableTEST", "UNSTest", "https://gateway.pinata.cloud/ipfs/QmeKJxzoc7PhhFn4ccsYtNqFzAAe8F6goSRhnJ6F6wWJBW/");
 
   const [deployer] = await ethers.getSigners();
   console.log(
