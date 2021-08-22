@@ -16,9 +16,15 @@
   color: #FF0DDF;
 }
 
-.MintSection p {
-  font-size: 18px;
+.why-different{
+  color: #FF0DDF;
+  font-size: 22px;
+  font-family: Bowlby One;
+}
+
+.MintSection{
   color: whitesmoke;
+  font-size: 18px;
   font-family: Roboto Slab;
 }
 

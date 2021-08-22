@@ -282,9 +282,18 @@ function MintSection() {
   return (
     <div ref={refToScroll} className="MintSection">
       <div className="mint-content-left">
+      
         <h1>Find your Unstable Animals!</h1>
         <p>In our latest expedition to the parallel worlds, we found a breach in space. 10,000 unstable animals have crossed to our reality and now live in our blockchain.</p>
-        <p>Use our minting technology to stabilize them in our reality</p>
+        {/* <p>Use our minting technology to stabilize them in our reality</p> */}
+        <p>You could find 15 different species with 9 trait categories.</p>
+        <p>Rare species: Martian, Dragon, Dinosaur and an Unknown Alien. (Each with less than 1% drop chance).</p>
+        <p class="why-different">Why we are different:</p>
+        <p>- 3D voxel design.</p>
+        <p>- Stored in IPFS with a premium gateway to secure your NFT access for ever.</p>
+        <p>- Part to the proceeds will be donated to a Free of Speech NGO. You will help us decide!</p>
+        <p>- We are supporting this project in the long term and making Unstable Animals the biggest brand possible.</p>
+
         <div className="mint-interface">
           <div className='UnstableAnimals-minted-wrapper'>
             {UnstableAnimalsMinted !== undefined && <div className='UnstableAnimals-minted'>
