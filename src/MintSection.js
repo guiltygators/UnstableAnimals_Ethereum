@@ -291,7 +291,7 @@ function MintSection() {
         <p class="why-different">Why we are different:</p>
         <p>- 3D voxel design.</p>
         <p>- Stored in IPFS with a premium gateway to secure your NFT access for ever.</p>
-        <p>- Part to the proceeds will be donated to a Free of Speech NGO. You will help us decide!</p>
+        <p>- Part of the proceeds will be donated to a Free of Speech NGO. You will help us decide!</p>
         <p>- We are supporting this project in the long term and making Unstable Animals the biggest brand possible.</p>
 
         <div className="mint-interface">
