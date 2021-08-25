@@ -12,34 +12,36 @@ module.exports = {
   }
 };
 
-// mainnet networks code
-const Private_KeyMainnet = ""
-
-module.exports = {
-  solidity: "0.8.4",
-  networks: {
-  	mainnet: {
-  		url: "https://mainnet.infura.io/v3/XXX",
-  		accounts: [Private_KeyMainnet],
-      gas: 1600000,
-      gasPrice: "aqui poner el numero del average Gwei, si no esto pone el mas alto" 
-      // 0.000000026 = 26Gwei por gas limit de 3000000 = 0.078
-      // yo me fui en 36.4 Gwei y gas limit de 3800000 = 0.138
-  	}
-  }
-};
-
-
-
-// test networks code
-// const Private_KeyRinkeby = "nope"
+// // mainnet networks code
+// const Private_KeyMainnet = "5d121ff1054cd0bd0b1f439fdce02283ced4afdaa9ca3a867e91caf95785ad38"
 
 // module.exports = {
 //   solidity: "0.8.4",
 //   networks: {
-//   	rinkeby: {
-//   		url: "https://rinkeby.infura.io/v3/YYY",
-//   		accounts: [Private_KeyRinkeby]
+//   	mainnet: {
+//   		url: "https://mainnet.infura.io/v3/6c44082b0de44311bc45c23c1926d3f8",
+//   		accounts: [Private_KeyMainnet],
+//       gas: 2000000,
+//       gasPrice: 35E9
 //   	}
 //   }
 // };
+
+
+
+// test networks code
+// account 1
+//const Private_KeyRinkeby = "914c092efa431a94f9f34ab42990e297e2df8ba4bd733545d576e1413fa72df4"
+//account 2
+const Private_KeyRinkeby = "63c1083d19a9c71852fad965b796acbd4fb8c4217e4796598683fb0995f10c29"
+
+module.exports = {
+  solidity: "0.8.4",
+  networks: {
+  	rinkeby: {
+  		url: "https://rinkeby.infura.io/v3/6c44082b0de44311bc45c23c1926d3f8",
+  		accounts: [Private_KeyRinkeby],
+      gasPrice: 1E9
+  	},
+  }
+};
