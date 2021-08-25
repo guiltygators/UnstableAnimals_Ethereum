@@ -37,7 +37,7 @@ module.exports = {
   solidity: "0.8.4",
   networks: {
   	rinkeby: {
-  		url: "https://rinkeby.infura.io/v3/6c44082b0de44311bc45c23c1926d3f8",
+  		url: "https://rinkeby.infura.io/v3/7ed550e4c51243b2ac36ca251d287b64",
   		accounts: [Private_KeyRinkeby],
       gasPrice: 1E9
   	},
