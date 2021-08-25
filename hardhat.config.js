@@ -27,8 +27,6 @@ module.exports = {
 //   }
 // };
 
-
-
 // test networks code
 // account 1
 //const Private_KeyRinkeby = "914c092efa431a94f9f34ab42990e297e2df8ba4bd733545d576e1413fa72df4"
