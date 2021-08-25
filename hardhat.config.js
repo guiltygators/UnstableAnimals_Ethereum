@@ -13,13 +13,13 @@ module.exports = {
 };
 
 // // mainnet networks code
-// const Private_KeyMainnet = "5d121ff1054cd0bd0b1f439fdce02283ced4afdaa9ca3a867e91caf95785ad38"
+// const Private_KeyMainnet = ""
 
 // module.exports = {
 //   solidity: "0.8.4",
 //   networks: {
 //   	mainnet: {
-//   		url: "https://mainnet.infura.io/v3/6c44082b0de44311bc45c23c1926d3f8",
+//   		url: "https://mainnet.infura.io/v3/",
 //   		accounts: [Private_KeyMainnet],
 //       gas: 2000000,
 //       gasPrice: 35E9
