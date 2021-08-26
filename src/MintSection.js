@@ -19,7 +19,7 @@ import {usePrevious} from "./usePrevious";
 // cambiar direccion de smart contract
 const UnstableAnimals_ADDRESS = '0xe29d2d356bffE827E4Df3B6cA9Fdc9819C3e2651'
 const CHAIN_ID = '0x1'
-export const OPENSEA_NAME = 'Unstable Animals'
+export const OPENSEA_NAME = 'unstable-animals'
 
 const provider = resolveProvider()
 const unstableAnimals = createContractHelper(UnstableAnimals_ADDRESS, UnstableAnimals.abi, provider)
@@ -301,7 +301,8 @@ function MintSection() {
 
         <div className="mint-interface">
           <div className='UnstableAnimals-minted-wrapper'>
-            {UnstableAnimalsMinted !== undefined && <div className='UnstableAnimals-minted'>
+
+            {/* {UnstableAnimalsMinted !== undefined && <div className='UnstableAnimals-minted'>
               <AnimateOnChange
                 baseClassName='UnstableAnimals-minted-count'
                 animationClassName='UnstableAnimals-minted-count--flash'
@@ -310,7 +311,8 @@ function MintSection() {
               >
                 {UnstableAnimalsMinted}
               </AnimateOnChange> / 10,000 Unstable Animals&nbsp;MINTED
-            </div>}
+            </div>} */}
+            
           </div>
           {getMintInput()}
           {getMintButton()}
