@@ -4,8 +4,7 @@ import {APP_STATE} from "./MintSection";
 import loadingSpinner from './images/loading-image.gif'
 import './UnstablePortrait.css'
 
-const BASE_URI = 'https://gateway.pinata.cloud/ipfs/QmeKJxzoc7PhhFn4ccsYtNqFzAAe8F6goSRhnJ6F6wWJBW/'
-// const BASE_URI = 'https://ipfs.io/ipfs/QmUMJ8KCcrLFsY8946qcq7U6jiwVHhML4ydQB1uc1n52sn'
+const BASE_URI = 'https://parallelworlds.mypinata.cloud/ipfs/QmQDWG92prsc64fPoeVtKrSZhR3RM2PCaCBCJLdH7A1vaK/'
 const TRANSPARENT = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
 const OPENSEA_URI_PREFIX = 'https://opensea.io/assets'
 

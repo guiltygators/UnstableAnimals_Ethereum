@@ -29,15 +29,15 @@ module.exports = {
 
 // test networks code
 // account 1
-//const Private_KeyRinkeby = "914c092efa431a94f9f34ab42990e297e2df8ba4bd733545d576e1413fa72df4"
+//const Private_KeyRinkeby = ""
 //account 2
-const Private_KeyRinkeby = "63c1083d19a9c71852fad965b796acbd4fb8c4217e4796598683fb0995f10c29"
+const Private_KeyRinkeby = ""
 
 module.exports = {
   solidity: "0.8.4",
   networks: {
   	rinkeby: {
-  		url: "https://rinkeby.infura.io/v3/7ed550e4c51243b2ac36ca251d287b64",
+  		url: "https://rinkeby.infura.io/v3/",
   		accounts: [Private_KeyRinkeby],
       gasPrice: 1E9
   	},
