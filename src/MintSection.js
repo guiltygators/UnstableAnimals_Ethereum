@@ -302,7 +302,7 @@ function MintSection() {
         <div className="mint-interface">
           <div className='UnstableAnimals-minted-wrapper'>
 
-            {/* {UnstableAnimalsMinted !== undefined && <div className='UnstableAnimals-minted'>
+            {UnstableAnimalsMinted !== undefined && <div className='UnstableAnimals-minted'>
               <AnimateOnChange
                 baseClassName='UnstableAnimals-minted-count'
                 animationClassName='UnstableAnimals-minted-count--flash'
@@ -311,7 +311,7 @@ function MintSection() {
               >
                 {UnstableAnimalsMinted}
               </AnimateOnChange> / 10,000 Unstable Animals&nbsp;MINTED
-            </div>} */}
+            </div>}
 
           </div>
           {getMintInput()}
@@ -361,7 +361,7 @@ function MintSection() {
         contentLabel="Example Modal"
       >
         <button onClick={showModal(false)}>✕</button>
-        <p>You'll need to install MetaMask to continue.<br />Once you have it installed, refresh this page. </p>
+        <p>You'll need to install MetaMask and refresh to continue.<br />Mobile user? open this page on you metamask app :) </p>
         <a href='https://metamask.io/download.html' target='_blank' rel='noreferrer'>Install Metamask<MetaMaskLogo /></a>
 
       </Modal>
