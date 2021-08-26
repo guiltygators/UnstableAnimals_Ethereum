@@ -47,10 +47,10 @@ function MintSection() {
   const [buyAmount, setBuyAmountValue] = useState(1)
   const [lastPurchasedUnstableAnimalsIds, setLastPurchasedUnstableAnimalsIds] = useState([])
 // temporalmente comento esta linea (volverla a activar luego) la que dice ready to mint
-  const [appState, setAppState] = useState(APP_STATE.readyToMint)
+  //const [appState, setAppState] = useState(APP_STATE.readyToMint)
 
 // borrar esta linea de .soldout solo esta para que en la pagina no este activa la compra
-  //const [appState, setAppState] = useState(APP_STATE.soldOut)
+  const [appState, setAppState] = useState(APP_STATE.soldOut)
 //  ^^^^^^^^^^^^^^^^^^^^^^^^^^ ESTA ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ BORRAR
 
   const [modalIsOpen, setModalOpen] = useState(false)
@@ -146,7 +146,7 @@ function MintSection() {
       const transaction = await unstableAnimals.signer.buy(
         buyAmount, {
           value: etherAmount,
-          gasLimit: `0x${(buyAmount * 180000).toString(16)}`
+          gasLimit: `0x${(buyAmount * 215019).toString(16)}`
         }
       )
       txHash = transaction.hash
