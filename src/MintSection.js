@@ -46,8 +46,13 @@ function wait(ms) {
 function MintSection() {
   const [buyAmount, setBuyAmountValue] = useState(1)
   const [lastPurchasedUnstableAnimalsIds, setLastPurchasedUnstableAnimalsIds] = useState([])
-// temporalmente comento esta linea (volverla a activar luego)
-  const [appState, setAppState] = useState(APP_STATE.readyToMint)
+// temporalmente comento esta linea (volverla a activar luego) la que dice ready to mint
+  //const [appState, setAppState] = useState(APP_STATE.readyToMint)
+
+// borrar esta linea de .soldout solo esta para que en la pagina no este activa la compra
+  const [appState, setAppState] = useState(APP_STATE.soldOut)
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^ ESTA ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ BORRAR
+
   const [modalIsOpen, setModalOpen] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
   const [shouldAnimateCount, setShouldAnimateCount] = useState(false)
