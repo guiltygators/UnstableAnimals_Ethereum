@@ -297,7 +297,7 @@ function MintSection() {
         <p>- Stored in IPFS with a premium gateway to secure your NFT access for ever.</p>
         <p>- Part of the proceeds will be donated to a Free of Speech NGO. You will help us decide!</p>
         <p>- We are supporting this project in the long term and making Unstable Animals the biggest brand possible.</p>
-        <p class="mint-time">Mint starts Aug 26 at 6PM EST!</p>
+        <p class="mint-time">Sale is ACTIVE! You can mint up to 10 at a time!</p>
 
         <div className="mint-interface">
           <div className='UnstableAnimals-minted-wrapper'>
