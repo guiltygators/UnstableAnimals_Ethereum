@@ -146,7 +146,7 @@ function MintSection() {
       const transaction = await unstableAnimals.signer.buy(
         buyAmount, {
           value: etherAmount,
-          gasLimit: `0x${(buyAmount * 215019).toString(16)}`
+          gasLimit: `0x${(buyAmount * 200000).toString(16)}`
         }
       )
       txHash = transaction.hash
