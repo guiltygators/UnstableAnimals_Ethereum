@@ -31,15 +31,15 @@ module.exports = {
 // account 1
 //const Private_KeyRinkeby = ""
 //account 2
-const Private_KeyRinkeby = ""
+// const Private_KeyRinkeby = "asd"
 
-module.exports = {
-  solidity: "0.8.4",
-  networks: {
-  	rinkeby: {
-  		url: "https://rinkeby.infura.io/v3/",
-  		accounts: [Private_KeyRinkeby],
-      gasPrice: 1E9
-  	},
-  }
-};
+// module.exports = {
+//   solidity: "0.8.4",
+//   networks: {
+//   	rinkeby: {
+//   		url: "https://rinkeby.infura.io/v3/asd",
+//   		accounts: [Private_KeyRinkeby],
+//       gasPrice: 1E9
+//   	},
+//   }
+// };
