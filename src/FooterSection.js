@@ -4,6 +4,7 @@ import { ReactComponent as DiscordIcon } from "./images/discord.svg";
 import { ReactComponent as TwitterIcon } from "./images/twitter.svg";
 import { ReactComponent as GithubIcon } from "./images/github.svg";
 import { ReactComponent as OpenSeaIcon } from "./images/open-sea.svg";
+import { OPENSEA_NAME } from "./MintSection";
 
 function FooterSection() {
 
