@@ -19,7 +19,8 @@ function TeamSection() {
               <img src= {Ksa}></img>
                 <div class="infos">
                   <span class="nickname">Ksa</span>
-                  <p>Designer and community manager</p>
+                  <p>Mom by day</p>
+                  <p>Designer and community manager by night</p>
                 </div>
             </a>
         </div>
