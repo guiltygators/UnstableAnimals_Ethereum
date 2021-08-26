@@ -26,7 +26,7 @@ function SplashHeader() {
       </div>
       <img className="logo" src={logo} alt="Unstable Animals Logo" /><br />
       <a onClick={() => dispatchEvent(scrollToMint)} className="button-1">
-        Mint Starts Aug 26
+        Mint your Unstable Animals!
       </a><br />
       <a href={`https://opensea.io/collection/${OPENSEA_NAME}`} target='_blank' rel='noreferrer' className="button-2">
         VIEW GALLERY
