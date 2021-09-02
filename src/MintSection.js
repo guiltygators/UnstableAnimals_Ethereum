@@ -134,6 +134,7 @@ function MintSection() {
   async function buyUnstableAnimals() {
     setErrorMessage(null)
     if (!unstableAnimals.web3Enabled) {
+      // devolver a true para PRODUCCION
       setModalOpen(true)
       return
     }
@@ -142,7 +143,8 @@ function MintSection() {
     await requestAccount()
     let txHash
     try {
-      // throw Error('Fake error pre-tx.')
+      //desactivar linea 146
+      throw Error('Fake error pre-tx.')
       const transaction = await unstableAnimals.signer.buy(
         buyAmount, {
           value: etherAmount,
