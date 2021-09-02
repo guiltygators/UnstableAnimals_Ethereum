@@ -136,6 +136,8 @@ function MintSection() {
     if (!unstableAnimals.web3Enabled) {
       // devolver a true para PRODUCCION
       setModalOpen(true)
+      // desactivar error
+      throw Error('Fake error first if.')
       return
     }
     if (!buyAmount || !parseInt(buyAmount || !buyPrice.wei)) return
