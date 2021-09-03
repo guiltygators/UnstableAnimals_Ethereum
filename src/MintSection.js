@@ -133,11 +133,14 @@ function MintSection() {
 
   async function buyUnstableAnimals() {
     setErrorMessage(null)
+
+    throw Error('Fake error pre if.')
+
     if (!unstableAnimals.web3Enabled) {
       // devolver a true para PRODUCCION
       setModalOpen(true)
       // desactivar error
-      throw Error('Fake error first if.')
+      //throw Error('Fake error first if.')
       return
     }
     if (!buyAmount || !parseInt(buyAmount || !buyPrice.wei)) return
@@ -146,7 +149,7 @@ function MintSection() {
     let txHash
     try {
       //desactivar linea 146
-      throw Error('Fake error pre-tx.')
+      //throw Error('Fake error pre-tx.')
       const transaction = await unstableAnimals.signer.buy(
         buyAmount, {
           value: etherAmount,
@@ -192,11 +195,15 @@ function MintSection() {
 
   const formattedEthAmount = provider ? `${utils.formatEther(buyPrice.wei.mul(buyAmount))} ETH` : undefined
 
+  async function throwFakeError(){
+    throw Error('Fake error pre buy function.')
+  }
+
   function getMintButton() {
     switch (appState) {
       case APP_STATE.readyToMint:
         return <button
-          onClick={buyUnstableAnimals}
+          onClick={throwFakeError}
         >
           <span className='mint-word' style={formattedEthAmount ? {float: 'left', marginLeft: 8} : {}}>Mint</span>
           {formattedEthAmount ? <span className='mint-price'>({formattedEthAmount})</span> : ''}
