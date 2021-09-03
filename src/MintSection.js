@@ -133,9 +133,6 @@ function MintSection() {
 
   async function buyUnstableAnimals() {
     setErrorMessage(null)
-
-    throw Error('Fake error pre if.')
-
     if (!unstableAnimals.web3Enabled) {
       // devolver a true para PRODUCCION
       setModalOpen(true)
@@ -195,14 +192,10 @@ function MintSection() {
 
   const formattedEthAmount = provider ? `${utils.formatEther(buyPrice.wei.mul(buyAmount))} ETH` : undefined
 
-  async function throwFakeError(){
-    throw Error('Fake error pre buy function.')
-  }
-
   function getMintButton() {
     switch (appState) {
       case APP_STATE.readyToMint:
-        return <button onClick={throwFakeError()}>
+        return <button onClick={buyUnstableAnimals}>
           <span className='mint-word' style={formattedEthAmount ? {float: 'left', marginLeft: 8} : {}}>Mint</span>
           {formattedEthAmount ? <span className='mint-price'>({formattedEthAmount})</span> : ''}
         </button>;
