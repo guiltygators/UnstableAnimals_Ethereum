@@ -131,7 +131,8 @@ function MintSection() {
     setAppState(APP_STATE.readyToMint)
   }
 
-  async function buyUnstableAnimals() {
+  async function buyUnstableAnimals(e) {
+    e.preventDefault();
     setErrorMessage(null)
     if (!unstableAnimals.web3Enabled) {
       // devolver a true para PRODUCCION
