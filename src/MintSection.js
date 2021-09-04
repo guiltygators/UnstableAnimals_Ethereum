@@ -132,7 +132,7 @@ function MintSection() {
   }
 
   async function buyUnstableAnimals(e) {
-    e.preventDefault();
+    //e.preventDefault();
     setErrorMessage(null)
     if (!unstableAnimals.web3Enabled) {
       // devolver a true para PRODUCCION
@@ -191,12 +191,22 @@ function MintSection() {
 
   }
 
+// onClick alternative
+  // var button = document.querySelector("#btnBuyUnstableAnimals");
+
+  // button.addEventListener("click", function onclick(event) {
+  //   Viewer.toggleThumbnails();
+  //   event.preventDefault();
+  // });
+// end of onClick alternative
+
+
   const formattedEthAmount = provider ? `${utils.formatEther(buyPrice.wei.mul(buyAmount))} ETH` : undefined
 
   function getMintButton() {
     switch (appState) {
       case APP_STATE.readyToMint:
-        return <button onClick={buyUnstableAnimals}>
+        return <button id="btnBuyUnstableAnimals" onClick={buyUnstableAnimals()}>
           <span className='mint-word' style={formattedEthAmount ? {float: 'left', marginLeft: 8} : {}}>Mint</span>
           {formattedEthAmount ? <span className='mint-price'>({formattedEthAmount})</span> : ''}
         </button>;
