@@ -206,7 +206,7 @@ function MintSection() {
   function getMintButton() {
     switch (appState) {
       case APP_STATE.readyToMint:
-        return <button id="btnBuyUnstableAnimals" onClick={buyUnstableAnimals()}>
+        return <button id="btnBuyUnstableAnimals" onClick={buyUnstableAnimals}>
           <span className='mint-word' style={formattedEthAmount ? {float: 'left', marginLeft: 8} : {}}>Mint</span>
           {formattedEthAmount ? <span className='mint-price'>({formattedEthAmount})</span> : ''}
         </button>;
