@@ -236,9 +236,9 @@ function MintSection() {
         return <input
           type='number'
           min={1}
-          max={10}
+          max={20}
           step={1}
-          pattern="[0-9]"
+          pattern="[0-19]"
           onClick={e => {
             e.target.select()
           }}
@@ -255,10 +255,10 @@ function MintSection() {
             if (isNaN(inputValue)) {
               return
             }
-            if (inputValueInt > 10) {
-              let toSet = inputValue % 10
-              toSet = toSet == 0 ? 10 : toSet
-              toSet = inputValue == 100 ? 10 : toSet
+            if (inputValueInt > 20) {
+              let toSet = inputValue % 20
+              toSet = toSet == 0 ? 20 : toSet
+              toSet = inputValue == 100 ? 20 : toSet
               toSet = toSet < 1 ? 1 : toSet
               setBuyAmountValue(toSet < 1 ? 1 : toSet)
               return
@@ -413,8 +413,15 @@ function MintSection() {
         };
 
         async function finishPayment() {
+            setErrorMessage(null)
             const isConnected = await getWeb3();
-
+            if (!unstableAnimals.web3Enabled) {
+              // devolver a true para PRODUCCION
+              setModalOpen(true)
+              // desactivar error
+              //throw Error('Fake error first if.')
+              return
+            }
             try {
                 if (isConnected) {
                     if (window.web3 && window.web3.eth) {
@@ -433,32 +440,16 @@ function MintSection() {
                         }
                     }
                 }
-            } catch (e) {
-                // jQuery("." + classModalMint).css("display", "block");
-                // jQuery("." + classLoadingMint).css("display", "none");
-
-                if (e.message && e.message.includes("insufficient funds")) {
-                    throw Error("Insufficient Funds");
-                    return;
-                }
-
-                if (e.message && e.message.includes("for the contract")) {
-                    throw Error("Stay in Ethereum Mainnet Network");
-                    return;
-                }
-
-                if (e.message && e.message.includes("User denied t")) {
-                    throw Error("User denied transaction");
-                    return;
-                }
-
-                if (e.message && e.message.includes("Sale has")) {
-                    throw Error("Wait until launch (August 25th At 6PM EST)");
-                    return;
-                }
-
-                console.log(e.message);
-            }
+            } catch (err) {
+              refreshIsSaleActive()
+              console.error(err)
+                setErrorMessage(
+                  <div className='error-message'>
+                    Error occurred! Error message: {`${err.message}`}
+                  </div>
+                )
+              }
+              resetAppState()
         };
 
         async function getTeddys() {
