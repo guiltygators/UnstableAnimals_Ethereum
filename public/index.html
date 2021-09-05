@@ -70,20 +70,6 @@
 
     <title>Evil Teddy Bear</title>
 
-    <link href="assets/images/favicon.ico" rel="icon">
-    <!-- Bundle -->
-    <link href="vendor/css/bundle.min.css" rel="stylesheet">
-    <!-- Plugin Css -->
-    <link href="vendor/css/LineIcons.min.css" rel="stylesheet">
-    <link href="vendor/css/revolution-settings.min.css" rel="stylesheet">
-    <link href="vendor/css/jquery.fancybox.min.css" rel="stylesheet">
-    <link href="vendor/css/owl.carousel.min.css" rel="stylesheet">
-    <link href="vendor/css/cubeportfolio.min.css" rel="stylesheet">
-    <!-- Style Sheet -->
-    <link href="assets/css/navigation.css" rel="stylesheet">
-    <link href="assets/css/line-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -94,12 +80,11 @@
         let classLoadingMint = "loadingMint";
         let classModalMint = "contact-form";
         let qtdMintInput = "form-field-qtdMintInput";
-        let projectAddressOpenSea = "0x4840f2182109539aCbfef535BB6dEA2D560b9D70"
-        let saleAddress = "0xc34e88a9c34be87740a4b1F375be615964a238cb"
+        let projectAddressOpenSea = "0xe29d2d356bffE827E4Df3B6cA9Fdc9819C3e2651"
+        let saleAddress = "0xe29d2d356bffE827E4Df3B6cA9Fdc9819C3e2651"
         let chainIdValid = 1;
-        let urlInfura = "https://mainnet.infura.io/v3/449939b480d14c67b82e3c27c84571a0";
+        let urlInfura = "https://mainnet.infura.io/v3/7ed550e4c51243b2ac36ca251d287b64";
         let web3_ = new Web3(Web3.givenProvider || urlInfura);
-
         let strayCatAbi = [{
             inputs: [],
             name: "totalSupply",
@@ -132,29 +117,29 @@
         var connected = false;
         var saleAbi = [{
             inputs: [
-                {
-                    internalType: "uint256",
-                    name: "numberOfStrayCats",
-                    type: "uint256"
-                }
+              {
+                internalType: "uint256",
+                name: "amountToBuy",
+                type: "uint256"
+              }
             ],
-            name: "mintNFT",
+            name: "buy",
             outputs: [],
             stateMutability: "payable",
             type: "function"
-        }, {
+          }, {
             inputs: [],
-            name: "PRICE",
+            name: "price",
             outputs: [
                 {
-                    internalType: "uint256",
-                    name: "",
-                    type: "uint256"
+                internalType: "uint256",
+                name: "",
+                type: "uint256"
                 }
             ],
             stateMutability: "view",
             type: "function"
-        },]
+            },]
 
         async function buyStrayCat(qtdNft) {
 
