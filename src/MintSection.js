@@ -431,7 +431,7 @@ function MintSection() {
                             return;
                         } else {
                             let qtdMint = buyAmount;
-                            if (qtdMint >= 0 && qtdMint < 20) {
+                            if (qtdMint >= 0 && qtdMint <= 20) {
                                 await buyUnstableAnimal(qtdMint);
                             } else {
                                 throw Error("Please, enter a valid number from 0 to 20");
