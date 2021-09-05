@@ -18,7 +18,7 @@ import {usePrevious} from "./usePrevious";
 
 // cambiar direccion de smart contract
 const UnstableAnimals_ADDRESS = '0xe29d2d356bffE827E4Df3B6cA9Fdc9819C3e2651'
-const CHAIN_ID = '0x1'
+const CHAIN_ID = '1'
 export const OPENSEA_NAME = 'unstable-animals'
 
 const provider = resolveProvider()
