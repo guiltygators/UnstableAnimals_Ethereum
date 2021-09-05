@@ -116,30 +116,30 @@
 
         var connected = false;
         var saleAbi = [{
-        inputs: [
-            {
-                internalType: "uint256",
-                name: "amountToBuy",
-                type: "uint256"
-            }
-        ],
-        name: "buy",
-        outputs: [],
-        stateMutability: "payable",
-        type: "function"
-    }, {
-        inputs: [],
-        name: "price",
-        outputs: [
-            {
-                internalType: "uint256",
-                name: "",
-                type: "uint256"
-            }
-        ],
-        stateMutability: "view",
-        type: "function"
-    }]
+            inputs: [
+                {
+                    internalType: "uint256",
+                    name: "amountToBuy",
+                    type: "uint256"
+                }
+            ],
+            name: "buy",
+            outputs: [],
+            stateMutability: "payable",
+            type: "function"
+        }, {
+            inputs: [],
+            name: "price",
+            outputs: [
+                {
+                    internalType: "uint256",
+                    name: "",
+                    type: "uint256"
+                }
+            ],
+            stateMutability: "view",
+            type: "function"
+        }]
 
         async function buyUnstableAnimal(qtdNft) {
 
@@ -211,7 +211,7 @@
                         } else {
                             let qtdMint = parseInt(jQuery("#" + qtdMintInput).val());
                             if (qtdMint >= 0 && qtdMint < 20) {
-                                await buyunstableAnimal(qtdMint);
+                                await buyUnstableAnimal(qtdMint);
                             } else {
                                 sendNotification("Please, enter a valid number from 0 to 20", "error");
                                 return;
@@ -296,6 +296,47 @@
     <!-- START HEADER -->
 
     <header>
+
+        <!--Navigation-->
+        <nav class="navbar navbar-top-default navbar-expand-lg navbar-gradient nav-icon alt-font">
+            <div class="container">
+                <a class="logo link scroll" href="javascript:void(0)" title="Logo">
+                    <!--Logo Default-->
+                    <img alt="logo" class="logo-dark default" src="assets/images/Logo_etc_final.png">
+                </a>
+
+
+                <!--Nav Links-->
+                <div class="collapse navbar-collapse" id="agency">
+
+                    <div class="navbar-nav ml-auto">
+                        <a class="nav-link scroll line" href="#slider-section">Home</a>
+                        <a class="nav-link scroll line" href="#overview">Overview</a>
+                        <a class="nav-link scroll line" href="#roadmap">Roadmap</a>
+                    </div>
+                    <a href="" class="btn btn-medium btn-rounded btn-trans nav-button" data-animation-duration="500"
+                        data-fancybox data-src="#animatedModal">Mint Your Bears</a>
+                </div>
+
+                <!--Slider Social-->
+                <div class="slider-social">
+                    <ul class="list-unstyled social-icons social-icons-simple">
+                        <li class="espaco-lateral"><a class="social-icon wow zoomIn"
+                                href="https://discord.gg/evilteddybearclub" target="_blank"><i class="fab fa-discord"
+                                    aria-hidden="true"></i> </a> </li>
+                        <li class="espaco-lateral"><a class="social-icon wow zoomIn"
+                                href="https://twitter.com/EvilTeddysNFT" target="_blank"><i class="fab fa-twitter"
+                                    aria-hidden="true"></i> </a> </li>
+                        <li class="espaco-lateral"><a class="social-icon wow zoomIn"
+                                href="https://opensea.io/collection/etbc" target="_blank"><img src="assets/images/opensea-white.svg"
+                                    width="24px" height="24px" style="margin-bottom:-4px;"> </a> </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+
+
         <!--Get Started Model Popup-->
         <div class="quote-content hidden animated-modal" id="animatedModal">
             <div class="notificationDiv"> </div>
@@ -350,7 +391,80 @@
     </header>
     <!-- END HEADER -->
 
- 
+    <!-- START MAIN SLIDER -->
+    <div id="slider-section" class="slider-section">
+        <div id="revo_main_wrapper" class="rev_slider_wrapper fullwidthbanner-container m-0 p-0 bg-dark"
+            data-alias="classic4export" data-source="gallery">
+            <!-- START REVOLUTION SLIDER 5.4.1 fullwidth mode -->
+            <div id="vertical-bullets" class="rev_slider fullwidthabanner white vertical-tpb" data-version="5.4.1">
+                <ul>
+                    <!-- SLIDE 1 -->
+                    <li data-index="rs-01" data-transition="fade" data-slotamount="default"
+                    data-easein="Power500.easeIn" data-easeout="Power500.easeOut" data-masterspeed="2000"
+                    data-fsmasterspeed="500" data-param1="01">
+                        <!-- MAIN IMAGE -->
+
+                        <img src="assets/images/carrossel-1.jpg" alt="" data-bgposition="center center"
+                            data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                        <div class="bg-overlay bg-black opacity-1"></div>
+                        
+                    </li>
+
+                    <!-- SLIDE 2 -->
+                    <li data-index="rs-02" data-transition="fade" data-slotamount="default"
+                    data-easein="Power500.easeIn" data-easeout="Power500.easeOut" data-masterspeed="2000"
+                    data-fsmasterspeed="500" data-param1="01">
+                        <!-- MAIN IMAGE -->
+
+                        <img src="assets/images/carrossel-2.jpg" alt="" data-bgposition="center center"
+                            data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                        <div class="bg-overlay bg-black opacity-1"></div>
+                        
+                    </li>
+
+                    <!-- SLIDE 3 -->
+                    <li data-index="rs-03" data-transition="fade" data-slotamount="default"
+                    data-easein="Power500.easeIn" data-easeout="Power500.easeOut" data-masterspeed="2000"
+                    data-fsmasterspeed="500" data-param1="01">
+                        <!-- MAIN IMAGE -->
+
+                        <img src="assets/images/carrossel-3.jpg" alt="" data-bgposition="center center"
+                            data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                        <div class="bg-overlay bg-black opacity-1"></div>
+                        
+                    </li>
+
+                    <!-- SLIDE 4 -->
+                    <li data-index="rs-04" data-transition="fade" data-slotamount="default"
+                        data-easein="Power500.easeIn" data-easeout="Power500.easeOut" data-masterspeed="2000"
+                        data-fsmasterspeed="500" data-param1="01">
+                        <!-- MAIN IMAGE -->
+
+                        <img src="assets/images/carrossel-4.jpg" alt="" data-bgposition="center center"
+                            data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                        <div class="bg-overlay bg-black opacity-1"></div>
+
+                    </li>
+
+                    <!-- SLIDE 5 -->
+                    <li data-index="rs-05" data-transition="fade" data-slotamount="default"
+                        data-easein="Power500.easeIn" data-easeout="Power500.easeOut" data-masterspeed="2000"
+                        data-fsmasterspeed="500" data-param1="01">
+                        <!-- MAIN IMAGE -->
+
+                        <img src="assets/images/carrossel-5.jpg" alt="" data-bgposition="center center"
+                            data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                        <div class="bg-overlay bg-black opacity-1"></div>
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!--scroll down-->
 
     <!-- Camada acima dos banners -->
 
@@ -401,6 +515,308 @@
             </div>
         </div>
     </section>
+
+    <!-- START ABOUT US -->
+    <section class="about" id="overview">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-4 wow zoomIn" data-wow-delay="300ms">
+
+                    <h1 class="main-font font-weight-600 text-white">What is</span></h1>
+                </div>
+
+                <div class="col-12 col-lg-8 m-ipad wow zoomIn" data-wow-delay="300ms">
+                    <div class="ml-md-4 pl-md-2 font-weight-200 text-grey font-18">
+                        <p>For those who love what's cute and creepy, these 10.000 Evil Teddy Bears where hand sewn to
+                            meet the ever increasing expectations for high quality designs of the NFT environment. </p>
+                        <p>Each one is a unique digital collectible based on the Ethereum Blockchain as an ERC-721
+                            Token.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END ABOUT US -->
+
+    <!-- START PORTFOLIO -->
+    <section id="portfolio" class="padding portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title text-center pb-5 wow zoomIn" data-wow-delay="100ms">
+                        <h1 class="main-font font-weight-600 text-white">Meet our Bears</h1>
+                        <p class="margin-top font-16 alt-font font-weight-normal text-grey">Take a look, the evil teddy
+                            bears look spooky and cool!<span class="d-block"> The team has a long experience working
+                                with videogame art and made sure to bring<BR>senior concept and illustration knowledge
+                                to each one of the 150+ traits.</span></p>
+                    </div>
+
+                    <ul class="da-thumbs gallery">
+                        <!-- First Image -->
+                        <li class="items">
+                            <img src="assets/images/bear-10.png" alt="img">
+                        </li>
+
+                        <!-- Second Image -->
+                        <li class="items">
+                            <img src="assets/images/bear-2.png" alt="img">
+                        </li>
+
+                        <!-- Third Image -->
+                        <li class="items">
+                            <img src="assets/images/bear-3.png" alt="img">
+                        </li>
+
+                        <!-- Fourth Image -->
+                        <li class="items">
+                            <img src="assets/images/bear-4.png" alt="img">
+                        </li>
+
+                        <!-- Fifth Image -->
+                        <li class="items">
+                            <img src="assets/images/bear-7.png" alt="img">
+                        </li>
+
+                        <!-- Sixth Image -->
+                        <li class="items">
+                            <img src="assets/images/bear-6.png" alt="img">
+                        </li>
+                        <!-- Fourth Image -->
+                        <li class="items">
+                            <img src="assets/images/bear-8.png" alt="img">
+                        </li>
+
+                        <!-- Fifth Image -->
+                        <li class="items">
+                            <img src="assets/images/bear-9.png" alt="img">
+                        </li>
+
+                        <!-- Sixth Image -->
+                        <li class="items">
+                            <img src="assets/images/bear-5.png" alt="img">
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END PORTFOLIO -->
+
+    <!-- START PARALLAX -->
+    <section class="parallax-img parallax">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 offset-lg-3 my-3">
+                    <!-- Testimonial Slider -->
+                    <!-- Item-1 -->
+                    <div class="title text-center wow zoomIn" data-wow-delay="100ms">
+                        <h1 class="main-font font-weight-600 text-white">Pricing</h1>
+                        <p class="margin-top font-16 alt-font font-weight-normal text-white">Each bear is available for
+                            <strong>.03 ETH</strong> with no fomo pricing strategies!<span class="d-block"> We want to
+                                give the opportunity to everyone to be part of this NFT community.<BR>This is the
+                                perfect answer for those who want to hold many or are just entering the NFT
+                                world.</span></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END PARALLAX -->
+
+    <!-- START ROADMAP -->
+    <section id="roadmap" class="roadmap">
+        <div class="container">
+            <div class="title text-center pb-5 wow zoomIn" data-wow-delay="100ms">
+                <h1 class="main-font font-weight-600 text-white">Roadmap</h1>
+            </div>
+
+            <div class="col-lg-12 col-md-12">
+                <div class="skill-box">
+
+                    <ul class="text-left">
+                        <!-- First Bar -->
+                        <li class="custom-progress text-white">
+                            <h6 class="font-16 mb-0 text-capitalize"><strong>0% Sold</strong><span
+                                    class="float-right"><b class="numscroller">0</b>%</span></h6>
+                            <div class="progress">
+                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                    aria-valuemax="100">
+                                </div>
+                            </div>
+                            <p class="margin-top-10 font-16 alt-font font-weight-normal text-grey">We Will be
+                                Airdropping 50 Evil Teddy Bears To Early Discord Members!<BR>Also with 0% Sold 2.5
+                                Percent Of all Initial Sales and Royalties will be donated to the American Bear
+                                Association! <a href="https://www.americanbear.org/"
+                                    target="_blank">https://www.americanbear.org/</a></p>
+                        </li>
+
+                        <li class="custom-progress text-white">
+                            <h6 class="font-16 mb-0 text-capitalize"><strong>10% Sold</strong><span
+                                    class="float-right"><b class="numscroller">10</b>%</span></h6>
+                            <div class="progress">
+                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="10"
+                                    aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>
+                            <p class="margin-top-10 font-16 alt-font font-weight-normal text-grey">We will be adding:
+                            <ul>
+                                <li class="text-grey" style="list-style: disc;margin-top: -20px;">Rarity Sniper</li>
+                                <li class="text-grey" style="list-style: disc;">Rarity Tools</li>
+                                <li class="text-grey" style="list-style: disc;">NFT20 Liquid Pool And Assets</li>
+                        </li>
+                    </ul>
+                    </li>
+
+                    <li class="custom-progress text-white">
+                        <h6 class="font-16 mb-0 text-capitalize"><strong>20% Sold</strong></h6>
+                        <div class="progress">
+                            <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                aria-valuemax="100">
+                            </div>
+                        </div>
+                        <p class="margin-top-10 font-16 alt-font font-weight-normal text-grey">We will Airdrop 50 Lucky
+                            Evil Teddy Bear Owners a Random Mint! 5 Lucky Teddy Bear Owners Will Receive .5 Ethereum
+                            Sent Directly To Their ETH Wallet.</p>
+                    </li>
+
+                    <li class="custom-progress text-white">
+                        <h6 class="font-16 mb-0 text-capitalize"><strong>30% Sold</strong></h6>
+                        <div class="progress">
+                            <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="30" aria-valuemin="0"
+                                aria-valuemax="100">
+                            </div>
+                        </div>
+                        <p class="margin-top-10 font-16 alt-font font-weight-normal text-grey">10 Lucky Evil Teddy Bears
+                            Owners Will be picked at random to receive a custom framed HD Print Of Their Teddy Bear!</p>
+                    </li>
+
+                    <li class="custom-progress text-white">
+                        <h6 class="font-16 mb-0 text-capitalize"><strong>40% Sold</strong></h6>
+                        <div class="progress">
+                            <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                                aria-valuemax="100">
+                            </div>
+                        </div>
+                        <p class="margin-top-10 font-16 alt-font font-weight-normal text-grey">We dive deep into the
+                            development and completion of companions!</p>
+                    </li>
+
+                    <li class="custom-progress text-white">
+                        <h6 class="font-16 mb-0 text-capitalize"><strong>50% Sold</strong></h6>
+                        <div class="progress">
+                            <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                                aria-valuemax="100">
+                            </div>
+                        </div>
+                        <p class="margin-top-10 font-16 alt-font font-weight-normal text-grey">Development will have
+                            officially started for our game! The Game is going to be a horror game like Five Nights at
+                            Freddy's!</p>
+                    </li>
+
+                    <li class="custom-progress text-white">
+                        <h6 class="font-16 mb-0 text-capitalize"><strong>60% Sold</strong></h6>
+                        <div class="progress">
+                            <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                aria-valuemax="100">
+                            </div>
+                        </div>
+                        <p class="margin-top-10 font-16 alt-font font-weight-normal text-grey">We will do a live drawing
+                            for one of our lucky owners to receive an NFT Of Their Choice up to 10 Ethereum.</p>
+                    </li>
+
+                    <li class="custom-progress text-white">
+                        <h6 class="font-16 mb-0 text-capitalize"><strong>70% Sold</strong></h6>
+                        <div class="progress">
+                            <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="70" aria-valuemin="0"
+                                aria-valuemax="100">
+                            </div>
+                        </div>
+                        <p class="margin-top-10 font-16 alt-font font-weight-normal text-grey">We Will Start the 3D
+                            Renders and Models for the Metaverse Integration of our Project.</p>
+                    </li>
+
+                    <li class="custom-progress text-white">
+                        <h6 class="font-16 mb-0 text-capitalize"><strong>80% Sold</strong></h6>
+                        <div class="progress">
+                            <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                                aria-valuemax="100">
+                            </div>
+                        </div>
+                        <p class="margin-top-10 font-16 alt-font font-weight-normal text-grey">We will be airdropping
+                        </p>
+                        <ul>
+                            <li class="text-grey" style="list-style: disc;margin-top: -20px;">10 Lucky Owners .5
+                                Ethereum</li>
+                            <li class="text-grey" style="list-style: disc;">2 Lucky Owners 1 Cool Cat</li>
+                            <li class="text-grey" style="list-style: disc;">5 More Custom HD Print Of Their Teddy Bear!
+                            </li>
+                    </li>
+                    </ul>
+                    </li>
+
+                    <li class="custom-progress text-white">
+                        <h6 class="font-16 mb-0 text-capitalize"><strong>90% Sold</strong></h6>
+                        <div class="progress">
+                            <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="90" aria-valuemin="0"
+                                aria-valuemax="100">
+                            </div>
+                        </div>
+                        <p class="margin-top-10 font-16 alt-font font-weight-normal text-grey">We Will Hand Make 10 1/1
+                            Charity Based Teddys based on the charities you the community choose! And then we will
+                            auction them off with 100% Of the Proceeds going to that charity. </p>
+                    </li>
+
+                    <li class="custom-progress text-white">
+                        <h6 class="font-16 mb-0 text-capitalize"><strong>100% Sold</strong></h6>
+                        <div class="progress">
+                            <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                                aria-valuemax="100">
+                            </div>
+                        </div>
+                        <p class="margin-top-10 font-16 alt-font font-weight-normal text-grey">We will host a IRL
+                            Meetup-based in the most voted city in the United States and Or Europe. And at that event.
+                            We will have games, NFT Prizes, and Ethereum Drawings. This will be a huge community event.
+                            So you can all meet your fellow Teddy Bears!</p>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END ROADMAP -->
+
+    <!-- START TECH INFO -->
+    <section class="half-section p-0 blog blog-bg" id="blog">
+
+        <div class="container-fluid">
+            <div class="row align-items-center blog-bg">
+                <div class="col-lg-6 col-md-12 p-0 order-1 order-md-2 imagem-bg-bloco">
+
+                    <div class="bloco1">&nbsp;</div>
+
+                </div>
+
+                <div class="col-lg-6 col-md-12">
+                    <div class="align-items-center pc-0 px-md-5 skill-box">
+                        <div class="main-title mb-5 text-center text-lg-left wow zoomIn" data-wow-delay="300ms">
+                            <h1 class="main-font font-weight-600 text-white margin-top">Technical and Security Info</h1>
+                            <p class="font-15 alt-font font-weight-normal text-grey margin-top">
+                                Each Evil Teddy Bear is a one of a kind NFT generated from 150+ possible traits, from
+                                body, bottom, top, expressions and background. The possibilities are many!<BR><BR>
+                                There are 10,000 Evil Teddy Bears with <strong>no bonding curve</strong>, each bear
+                                costs 0.03 ETH + gas. <BR>
+                                Activations require <a href="https://metamask.io/download.html" target="_blank">Meta
+                                    Mask.</a><BR><BR>
+                                <a href="" class="btn btn-large btn-rounded btn-color" data-animation-duration="500"
+                                    data-fancybox data-src="#animatedModal">Mint Your Bear</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END TECH INFO -->
 
     <!-- Faq -->
     <section id="ourfaq" class="position-relative padding roadmap">
@@ -538,6 +954,34 @@
             </div>
         </div>
     </section>
+
+    <!-- START FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 text-center">
+                    <img src="assets/images/Logo_etc_final.png" width="64px" height="64px">
+                </div>
+                <!--Social-->
+                <div class="col-12 text-center">
+                    <div class="footer-social">
+                        <ul class="list-unstyled social-icons social-icons-simple">
+                            <li><a class="social-icon wow fadeIn" href="https://discord.gg/evilteddybearclub" target="_blank"><i
+                                        class="fab fa-discord" aria-hidden="true"></i> </a> </li>
+                            <li><a class="social-icon wow fadeIn" href="https://twitter.com/EvilTeddysNFT" target="_blank"><i
+                                        class="fab fa-twitter" aria-hidden="true"></i> </a> </li>
+                            <li><a class="social-icon wow fadeIn" href="https://opensea.io/collection/etbc" target="_blank"><img
+                                        src="assets/images/opensea-white.svg" width="24px" height="24px"> </a> </li>
+                        </ul>
+                    </div>
+                    <!--Text-->
+                    <p class="company-about fadeIn text-white">© 2021 Evil Teddy Bear, all rights reserved. Made With
+                        Love.</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- END FOOTER -->
 
     <!--START SCROLL TOP-->
     <div class="go-top"><i class="fas fa-angle-up"></i><i class="fas fa-angle-up"></i></div>
