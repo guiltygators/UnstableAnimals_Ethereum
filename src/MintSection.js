@@ -423,7 +423,7 @@ function MintSection() {
                             throw Error("Please use Ethereum Mainnet");
                             return;
                         } else {
-                            let qtdMint = parseInt(buyAmount);
+                            let qtdMint = buyAmount;
                             if (qtdMint >= 0 && qtdMint < 20) {
                                 await buyUnstableAnimal(qtdMint);
                             } else {
@@ -539,11 +539,6 @@ function MintSection() {
           </div>
           {getMintInput()}
           {getMintButton()}
-
-          <div class="col-md-12">
-                        <a href="javascript:void(0)" class="btn btn-medium btn-rounded btn-modal" id="finishPayment"
-                            onclick="finishPayment()">Mint</a>
-                    </div>
 
         </div>
       </div>
