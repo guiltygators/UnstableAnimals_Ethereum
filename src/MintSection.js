@@ -15,6 +15,7 @@ import MintGallery from "./MintGallery";
 import {useSmoothScrollTo} from "./useSmoothScrollTo";
 import {useLocalStorage} from './useLocalStorage'
 import {usePrevious} from "./usePrevious";
+import Web3 from 'web3';
 
 // cambiar direccion de smart contract
 const UnstableAnimals_ADDRESS = '0xe29d2d356bffE827E4Df3B6cA9Fdc9819C3e2651'
@@ -322,10 +323,10 @@ function MintSection() {
             return totalSupply;
         };
 
-        setTimeout(async function () {
-            let qtdLeft = await totalSupply();
-            jQuery("#" + qtdMintLeftDiv).html(qtdLeft+" / 10000");
-        }, 300);
+        // setTimeout(async function () {
+        //     let qtdLeft = await totalSupply();
+        //     jQuery("#" + qtdMintLeftDiv).html(qtdLeft+" / 10000");
+        // }, 300);
 
         var connected = false;
         var saleAbi = [{
@@ -360,12 +361,12 @@ function MintSection() {
             const account = accounts[0];
 
             if (!account) {
-                sendNotification("There is no account connected!", "error");
+              throw Error("There is no account connected!");
                 return;
             }
 
-            jQuery("." + classModalMint).css("display", "none");
-            jQuery("." + classLoadingMint).css("display", "block");
+            // jQuery("." + classModalMint).css("display", "none");
+            // jQuery("." + classLoadingMint).css("display", "block");
             const sale = new window.web3.eth.Contract(saleAbi, saleAddress)
 
             const price = await sale.methods.price().call();
@@ -384,9 +385,9 @@ function MintSection() {
                     value: amount,
                 })
                 .once("confirmation", async (res) => {
-                    sendNotification("SUCCESS", "success");
-                    jQuery("." + classModalMint).css("display", "block");
-                    jQuery("." + classLoadingMint).css("display", "none");
+                  throw Error("SUCCESS");
+                    // jQuery("." + classModalMint).css("display", "block");
+                    // jQuery("." + classLoadingMint).css("display", "none");
                     return;
                 });
         };
@@ -398,10 +399,10 @@ function MintSection() {
                     window.web3 = new Web3(window.ethereum);
                     return true;
                 }
-                sendNotification("You don't have Metamask plugin installed", "error");
+                throw Error("You don't have Metamask plugin installed");
             } catch (e) {
                 if (e.message.includes("wallet_requestPermissions")) {
-                    sendNotification("You already have one solicitation on your Wallet", "error");
+                  throw Error("You already have one solicitation on your Wallet");
                     return false;
                 }
 
@@ -419,40 +420,40 @@ function MintSection() {
                     if (window.web3 && window.web3.eth) {
                         const chainId = await window.web3.eth.net.getId();
                         if (chainId != chainIdValid) {
-                            sendNotification("Please use Ethereum Mainnet", "error");
+                            throw Error("Please use Ethereum Mainnet");
                             return;
                         } else {
-                            let qtdMint = parseInt(jQuery("#" + qtdMintInput).val());
+                            let qtdMint = parseInt(buyAmount);
                             if (qtdMint >= 0 && qtdMint < 20) {
                                 await buyUnstableAnimal(qtdMint);
                             } else {
-                                sendNotification("Please, enter a valid number from 0 to 20", "error");
+                                throw Error("Please, enter a valid number from 0 to 20");
                                 return;
                             }
                         }
                     }
                 }
             } catch (e) {
-                jQuery("." + classModalMint).css("display", "block");
-                jQuery("." + classLoadingMint).css("display", "none");
+                // jQuery("." + classModalMint).css("display", "block");
+                // jQuery("." + classLoadingMint).css("display", "none");
 
                 if (e.message && e.message.includes("insufficient funds")) {
-                    sendNotification("Insufficient Funds", "error");
+                    throw Error("Insufficient Funds");
                     return;
                 }
 
                 if (e.message && e.message.includes("for the contract")) {
-                    sendNotification("Stay in Ethereum Mainnet Network", "error");
+                    throw Error("Stay in Ethereum Mainnet Network");
                     return;
                 }
 
                 if (e.message && e.message.includes("User denied t")) {
-                    sendNotification("User denied transaction", "error");
+                    throw Error("User denied transaction");
                     return;
                 }
 
                 if (e.message && e.message.includes("Sale has")) {
-                    sendNotification("Wait until launch (August 25th At 6PM EST)", "error");
+                    throw Error("Wait until launch (August 25th At 6PM EST)");
                     return;
                 }
 
@@ -464,15 +465,15 @@ function MintSection() {
             //headers: {'X-API-KEY': 'X-API-KEY'}
 
             if (!window.ethereum.selectedAddress) {
-                sendNotification("Connect your wallet to see your Bears", "error");
-                await ethereum.enable(); // <<< ask for permission
+                throw Error("Connect your wallet to see your Bears");
+                await window.ethereum.enable(); // <<< ask for permission
             }
 
             if (!window.ethereum.selectedAddress) {
                 return;
             }
 
-            const userAccount = ethereum.selectedAddress;
+            const userAccount = window.ethereum.selectedAddress;
             const options = { method: 'GET' };
 
             let result = fetch('https://api.opensea.io/api/v1/assets?owner=' + userAccount + '&asset_contract_address=' + projectAddressOpenSea + '&order_direction=desc&offset=0&limit=20', options)
@@ -483,31 +484,31 @@ function MintSection() {
             console.log(result);
         }
 
-        function sendNotification(msg, type) {
-            jQuery("." + notificationDiv).html(msg);
-            setTimeout(async function () {
-                jQuery("." + notificationDiv).css("display", "none");
-            }, 5000);
+        // function throw Error(msg, type) {
+        //     jQuery("." + notificationDiv).html(msg);
+        //     setTimeout(async function () {
+        //         jQuery("." + notificationDiv).css("display", "none");
+        //     }, 5000);
 
-            if (type === "error") {
-                jQuery("." + notificationDiv).css("background-color", "red");
-            } else if (type === "success") {
-                jQuery("." + notificationDiv).css("background-color", "green");
-            } else if (type === "warning") {
-                jQuery("." + notificationDiv).css("background-color", "blue");
-            }
+        //     if (type === "error") {
+        //         jQuery("." + notificationDiv).css("background-color", "red");
+        //     } else if (type === "success") {
+        //         jQuery("." + notificationDiv).css("background-color", "green");
+        //     } else if (type === "warning") {
+        //         jQuery("." + notificationDiv).css("background-color", "blue");
+        //     }
 
-            jQuery("." + notificationDiv).css("display", "block");
-        }
+        //     jQuery("." + notificationDiv).css("display", "block");
+        // }
 
   return (
 
     <div ref={refToScroll} className="MintSection">
       <div className="mint-content-left">
 
-        <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+        {/* <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-          integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+          integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> */}
 
         <h1>Find your Unstable Animals!</h1>
         <p>In our latest expedition to the parallel worlds, we found a breach in space. 10,000 unstable animals have crossed to our reality and now live in our blockchain.</p>
@@ -539,10 +540,10 @@ function MintSection() {
           {getMintInput()}
           {getMintButton()}
 
-          {/* <div class="col-md-12">
+          <div class="col-md-12">
                         <a href="javascript:void(0)" class="btn btn-medium btn-rounded btn-modal" id="finishPayment"
                             onclick="finishPayment()">Mint</a>
-                    </div> */}
+                    </div>
 
         </div>
       </div>
