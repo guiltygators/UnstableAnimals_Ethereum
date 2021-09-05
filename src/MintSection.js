@@ -196,7 +196,6 @@ function MintSection() {
   function getMintButton() {
     switch (appState) {
       case APP_STATE.readyToMint:
-        //return <button onClick={buyUnstableAnimals}>
         return <button onClick={finishPayment}>
           <span className='mint-word' style={formattedEthAmount ? {float: 'left', marginLeft: 8} : {}}>Mint</span>
           {formattedEthAmount ? <span className='mint-price'>({formattedEthAmount})</span> : ''}
@@ -236,9 +235,9 @@ function MintSection() {
         return <input
           type='number'
           min={1}
-          max={20}
+          max={10}
           step={1}
-          pattern="[0-19]"
+          pattern="[0-9]"
           onClick={e => {
             e.target.select()
           }}
@@ -255,10 +254,10 @@ function MintSection() {
             if (isNaN(inputValue)) {
               return
             }
-            if (inputValueInt > 20) {
-              let toSet = inputValue % 20
-              toSet = toSet == 0 ? 20 : toSet
-              toSet = inputValue == 100 ? 20 : toSet
+            if (inputValueInt > 10) {
+              let toSet = inputValue % 10
+              toSet = toSet == 0 ? 10 : toSet
+              toSet = inputValue == 100 ? 10 : toSet
               toSet = toSet < 1 ? 1 : toSet
               setBuyAmountValue(toSet < 1 ? 1 : toSet)
               return
@@ -289,46 +288,10 @@ function MintSection() {
 
 
   // empieza codigo nuevo
-        let qtdMintLeftDiv = "qtdMintLeftDiv";
-        let notificationDiv = "notificationDiv";
-        let classLoadingMint = "loadingMint";
-        let classModalMint = "contact-form";
-        let qtdMintInput = "form-field-qtdMintInput";
-        let projectAddressOpenSea = "0xe29d2d356bffE827E4Df3B6cA9Fdc9819C3e2651"
+        
         let saleAddress = "0xe29d2d356bffE827E4Df3B6cA9Fdc9819C3e2651"
         let chainIdValid = 1;
-        let urlInfura = "https://mainnet.infura.io/v3/7ed550e4c51243b2ac36ca251d287b64";
-        let web3_ = new Web3(Web3.givenProvider || urlInfura);
-        let strayCatAbi = [{
-            inputs: [],
-            name: "totalSupply",
-            outputs: [
-                {
-                    internalType: "uint256",
-                    name: "",
-                    type: "uint256"
-                }
-            ],
-            stateMutability: "view",
-            type: "function"
-        }]
 
-        async function totalSupply() {
-            const contract = new web3_.eth.Contract(strayCatAbi, projectAddressOpenSea);
-            let totalSupply = "0";
-            try {
-                totalSupply = await contract.methods.totalSupply().call();
-            } catch (e) { }
-
-            return totalSupply;
-        };
-
-        // setTimeout(async function () {
-        //     let qtdLeft = await totalSupply();
-        //     jQuery("#" + qtdMintLeftDiv).html(qtdLeft+" / 10000");
-        // }, 300);
-
-        var connected = false;
         var saleAbi = [{
             inputs: [
                 {
@@ -362,11 +325,8 @@ function MintSection() {
 
             if (!account) {
               throw Error("There is no account connected!");
-                return;
             }
 
-            // jQuery("." + classModalMint).css("display", "none");
-            // jQuery("." + classLoadingMint).css("display", "block");
             const sale = new window.web3.eth.Contract(saleAbi, saleAddress)
 
             const price = await sale.methods.price().call();
@@ -386,8 +346,6 @@ function MintSection() {
                 })
                 .once("confirmation", async (res) => {
                   throw Error("SUCCESS");
-                    // jQuery("." + classModalMint).css("display", "block");
-                    // jQuery("." + classLoadingMint).css("display", "none");
                     return;
                 });
         };
@@ -409,7 +367,6 @@ function MintSection() {
                 return false;
             }
 
-            return false;
         };
 
         async function finishPayment() {
@@ -431,10 +388,10 @@ function MintSection() {
                             return;
                         } else {
                             let qtdMint = buyAmount;
-                            if (qtdMint >= 0 && qtdMint <= 20) {
+                            if (qtdMint >= 0 && qtdMint <= 10) {
                                 await buyUnstableAnimal(qtdMint);
                             } else {
-                                throw Error("Please, enter a valid number from 0 to 20");
+                                throw Error("Please, enter a valid number from 0 to 10");
                                 return;
                             }
                         }
@@ -445,52 +402,12 @@ function MintSection() {
               console.error(err)
                 setErrorMessage(
                   <div className='error-message'>
-                    Error occurred! Error message: {`${err.message}`}
+                    Error occurred! {`${err.message}`}
                   </div>
                 )
               }
               resetAppState()
         };
-
-        async function getTeddys() {
-            //headers: {'X-API-KEY': 'X-API-KEY'}
-
-            if (!window.ethereum.selectedAddress) {
-                throw Error("Connect your wallet to see your Bears");
-                await window.ethereum.enable(); // <<< ask for permission
-            }
-
-            if (!window.ethereum.selectedAddress) {
-                return;
-            }
-
-            const userAccount = window.ethereum.selectedAddress;
-            const options = { method: 'GET' };
-
-            let result = fetch('https://api.opensea.io/api/v1/assets?owner=' + userAccount + '&asset_contract_address=' + projectAddressOpenSea + '&order_direction=desc&offset=0&limit=20', options)
-                .then(response => response.json())
-                .then(response => console.log(response))
-                .catch(err => console.error(err));
-
-            console.log(result);
-        }
-
-        // function throw Error(msg, type) {
-        //     jQuery("." + notificationDiv).html(msg);
-        //     setTimeout(async function () {
-        //         jQuery("." + notificationDiv).css("display", "none");
-        //     }, 5000);
-
-        //     if (type === "error") {
-        //         jQuery("." + notificationDiv).css("background-color", "red");
-        //     } else if (type === "success") {
-        //         jQuery("." + notificationDiv).css("background-color", "green");
-        //     } else if (type === "warning") {
-        //         jQuery("." + notificationDiv).css("background-color", "blue");
-        //     }
-
-        //     jQuery("." + notificationDiv).css("display", "block");
-        // }
 
   return (
 
@@ -502,15 +419,15 @@ function MintSection() {
           integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> */}
 
         <h1>Find your Unstable Animals!</h1>
-        <p>In our latest expedition to the parallel worlds, we found a breach in space. 10,000 unstable animals have crossed to our reality and now live in our blockchain.</p>
+        <p>In our latest expedition to the parallel worlds, we found a breach in space. 10,000 unstable animals have crossed to our reality and now live on the Ethereum Blockchain as ERC-721 Tokens.</p>
         {/* <p>Use our minting technology to stabilize them in our reality</p> */}
-        <p>You could find 15 different species with 9 trait categories.</p>
+        <p>Each one is a unique digital collectible with Voxel aesthetic. You could find 15 different species with 9 trait categories.</p>
         <p>Rare species: Martian, Dragon, Dinosaur and an Unknown Alien. (Each with less than 1% drop chance).</p>
-        <p class="why-different">Why we are different:</p>
+        {/* <p class="why-different">Why we are different:</p>
         <p>- 3D voxel design.</p>
         <p>- Stored in IPFS with a premium gateway to secure your NFT access for ever.</p>
         <p>- Part of the proceeds will be donated to a Free of Speech NGO. You will help us decide!</p>
-        <p>- We are supporting this project in the long term and making Unstable Animals the biggest brand possible.</p>
+        <p>- We are supporting this project in the long term and making Unstable Animals the biggest brand possible.</p> */}
         <p class="mint-time">Sale is ACTIVE! You can mint up to 10 at a time!</p>
 
         <div className="mint-interface">
