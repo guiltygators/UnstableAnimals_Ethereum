@@ -86,17 +86,17 @@
         let urlInfura = "https://mainnet.infura.io/v3/7ed550e4c51243b2ac36ca251d287b64";
         let web3_ = new Web3(Web3.givenProvider || urlInfura);
         let strayCatAbi = [{
-          inputs: [],
-          name: "totalSupply",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256"
-            }
-          ],
-          stateMutability: "view",
-          type: "function"
+            inputs: [],
+            name: "totalSupply",
+            outputs: [
+                {
+                    internalType: "uint256",
+                    name: "",
+                    type: "uint256"
+                }
+            ],
+            stateMutability: "view",
+            type: "function"
         }]
 
         async function totalSupply() {
@@ -116,32 +116,32 @@
 
         var connected = false;
         var saleAbi = [{
-          inputs: [
+        inputs: [
             {
-              internalType: "uint256",
-              name: "amountToBuy",
-              type: "uint256"
+                internalType: "uint256",
+                name: "amountToBuy",
+                type: "uint256"
             }
-          ],
-          name: "buy",
-          outputs: [],
-          stateMutability: "payable",
-          type: "function"
-        }, {
-          inputs: [],
-          name: "price",
-          outputs: [
-              {
-              internalType: "uint256",
-              name: "",
-              type: "uint256"
-              }
-          ],
-          stateMutability: "view",
-          type: "function"
-        },]
+        ],
+        name: "buy",
+        outputs: [],
+        stateMutability: "payable",
+        type: "function"
+    }, {
+        inputs: [],
+        name: "price",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "",
+                type: "uint256"
+            }
+        ],
+        stateMutability: "view",
+        type: "function"
+    }]
 
-        async function buyStrayCat(qtdNft) {
+        async function buyUnstableAnimal(qtdNft) {
 
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             const account = accounts[0];
@@ -155,10 +155,10 @@
             jQuery("." + classLoadingMint).css("display", "block");
             const sale = new window.web3.eth.Contract(saleAbi, saleAddress)
 
-            const price = await sale.methods.PRICE().call();
+            const price = await sale.methods.price().call();
             const amount = Number(price) * Number(qtdNft)
 
-            const method = sale.methods.mintNFT(Number(qtdNft));
+            const method = sale.methods.buy(Number(qtdNft));
             const gasEstimation = await method.estimateGas({
                 from: account,
                 value: amount,
@@ -211,7 +211,7 @@
                         } else {
                             let qtdMint = parseInt(jQuery("#" + qtdMintInput).val());
                             if (qtdMint >= 0 && qtdMint < 20) {
-                                await buyStrayCat(qtdMint);
+                                await buyunstableAnimal(qtdMint);
                             } else {
                                 sendNotification("Please, enter a valid number from 0 to 20", "error");
                                 return;
