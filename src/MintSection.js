@@ -319,12 +319,17 @@ function MintSection() {
         }]
 
         async function buyUnstableAnimal(qtdNft) {
-
+            setErrorMessage(null)
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             const account = accounts[0];
-
+          
             if (!account) {
-              throw Error("There is no account connected!");
+              setErrorMessage(
+                <div className='error-message'>
+                  There is no account connected!
+                </div>
+              )
+              //throw Error("There is no account connected!");
             }
 
             const sale = new window.web3.eth.Contract(saleAbi, saleAddress)
@@ -338,6 +343,8 @@ function MintSection() {
                 value: amount,
             });
 
+            setAppState(APP_STATE.waitingForTx)
+            
             return await method
                 .send({
                     from: account,
@@ -345,22 +352,38 @@ function MintSection() {
                     value: amount,
                 })
                 .once("confirmation", async (res) => {
-                  throw Error("SUCCESS");
-                    return;
+                  setAppState(APP_STATE.txSuccess)
+                  setErrorMessage(
+                    <div className='confirmation-message'>
+                      Transaction successfully completed.
+                    </div>
+                  )
+                    //return;
                 });
         };
 
         async function getWeb3() {
+            setErrorMessage(null)
             try {
                 if (window.ethereum) {
                     await window.ethereum.send('eth_requestAccounts');
                     window.web3 = new Web3(window.ethereum);
                     return true;
                 }
-                throw Error("You don't have Metamask plugin installed");
+                setErrorMessage(
+                  <div className='error-message'>
+                    You don't have Metamask plugin installed
+                  </div>
+                )
+                //throw Error("You don't have Metamask plugin installed");
             } catch (e) {
                 if (e.message.includes("wallet_requestPermissions")) {
-                  throw Error("You already have one solicitation on your Wallet");
+                  setErrorMessage(
+                    <div className='error-message'>
+                      You already have one solicitation on your Wallet
+                    </div>
+                  )
+                  //throw Error("You already have one solicitation on your Wallet");
                     return false;
                 }
 
@@ -373,10 +396,7 @@ function MintSection() {
             setErrorMessage(null)
             const isConnected = await getWeb3();
             if (!unstableAnimals.web3Enabled) {
-              // devolver a true para PRODUCCION
               setModalOpen(true)
-              // desactivar error
-              //throw Error('Fake error first if.')
               return
             }
             try {
@@ -384,14 +404,25 @@ function MintSection() {
                     if (window.web3 && window.web3.eth) {
                         const chainId = await window.web3.eth.net.getId();
                         if (chainId != chainIdValid) {
-                            throw Error("Please use Ethereum Mainnet");
+                            setErrorMessage(
+                              <div className='error-message'>
+                                Please use Ethereum Mainnet
+                              </div>
+                            )
+                            //throw Error("Please use Ethereum Mainnet");
                             return;
                         } else {
                             let qtdMint = buyAmount;
                             if (qtdMint >= 0 && qtdMint <= 10) {
                                 await buyUnstableAnimal(qtdMint);
+                                //setAppState(APP_STATE.txSuccess)
                             } else {
-                                throw Error("Please, enter a valid number from 0 to 10");
+                                setErrorMessage(
+                                  <div className='error-message'>
+                                    Please, enter a valid number from 0 to 10
+                                  </div>
+                                )
+                                //throw Error("Please, enter a valid number from 0 to 10");
                                 return;
                             }
                         }

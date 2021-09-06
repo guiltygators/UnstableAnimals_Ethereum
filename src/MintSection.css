@@ -297,7 +297,13 @@
 .error-message {
   margin-top: 28px;
   font-weight: bold;
-  color: red;
+  color:indianred;
+}
+
+.confirmation-message {
+  margin-top: 32px;
+  font-weight: bold;
+  color: #00bd00;
 }
 
 .get-metamask-modal {
