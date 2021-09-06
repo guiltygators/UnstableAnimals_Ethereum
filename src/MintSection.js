@@ -496,7 +496,7 @@ function MintSection() {
         appState={appState}
         contractAddress={UnstableAnimals_ADDRESS}
       />}
-
+{/* // add later */}
       {/* <div
         disabled={!showViewUnstableAnimals}
         className={showViewUnstableAnimals ? 'view-my-UnstableAnimals' : 'view-my-UnstableAnimals not-minted-yet'}
