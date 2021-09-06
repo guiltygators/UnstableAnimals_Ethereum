@@ -15,6 +15,7 @@ import MintGallery from "./MintGallery";
 import {useSmoothScrollTo} from "./useSmoothScrollTo";
 import {useLocalStorage} from './useLocalStorage'
 import {usePrevious} from "./usePrevious";
+import Web3 from 'web3';
 
 // cambiar direccion de smart contract
 const UnstableAnimals_ADDRESS = '0xe29d2d356bffE827E4Df3B6cA9Fdc9819C3e2651'
@@ -134,7 +135,10 @@ function MintSection() {
   async function buyUnstableAnimals() {
     setErrorMessage(null)
     if (!unstableAnimals.web3Enabled) {
+      // devolver a true para PRODUCCION
       setModalOpen(true)
+      // desactivar error
+      //throw Error('Fake error first if.')
       return
     }
     if (!buyAmount || !parseInt(buyAmount || !buyPrice.wei)) return
@@ -142,7 +146,8 @@ function MintSection() {
     await requestAccount()
     let txHash
     try {
-      // throw Error('Fake error pre-tx.')
+      //desactivar linea 146
+      //throw Error('Fake error pre-tx.')
       const transaction = await unstableAnimals.signer.buy(
         buyAmount, {
           value: etherAmount,
@@ -191,9 +196,7 @@ function MintSection() {
   function getMintButton() {
     switch (appState) {
       case APP_STATE.readyToMint:
-        return <button
-          onClick={buyUnstableAnimals}
-        >
+        return <button onClick={finishPayment}>
           <span className='mint-word' style={formattedEthAmount ? {float: 'left', marginLeft: 8} : {}}>Mint</span>
           {formattedEthAmount ? <span className='mint-price'>({formattedEthAmount})</span> : ''}
         </button>;
@@ -283,20 +286,181 @@ function MintSection() {
 
   const refToScroll = useSmoothScrollTo('#mint', 'scrollToMint')
 
+
+  // empieza codigo nuevo
+        
+        let saleAddress = "0xe29d2d356bffE827E4Df3B6cA9Fdc9819C3e2651"
+        let chainIdValid = 1;
+
+        var saleAbi = [{
+            inputs: [
+                {
+                    internalType: "uint256",
+                    name: "amountToBuy",
+                    type: "uint256"
+                }
+            ],
+            name: "buy",
+            outputs: [],
+            stateMutability: "payable",
+            type: "function"
+        }, {
+            inputs: [],
+            name: "price",
+            outputs: [
+                {
+                    internalType: "uint256",
+                    name: "",
+                    type: "uint256"
+                }
+            ],
+            stateMutability: "view",
+            type: "function"
+        }]
+
+        async function buyUnstableAnimal(qtdNft) {
+            setErrorMessage(null)
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            const account = accounts[0];
+          
+            if (!account) {
+              setErrorMessage(
+                <div className='error-message'>
+                  There is no account connected!
+                </div>
+              )
+              //throw Error("There is no account connected!");
+            }
+
+            const sale = new window.web3.eth.Contract(saleAbi, saleAddress)
+
+            const price = await sale.methods.price().call();
+            const amount = Number(price) * Number(qtdNft)
+
+            const method = sale.methods.buy(Number(qtdNft));
+            const gasEstimation = await method.estimateGas({
+                from: account,
+                value: amount,
+            });
+
+            setAppState(APP_STATE.waitingForTx)
+            //define gas limit
+            let gaslimit = `0x${(qtdNft * 200000).toString(16)}`
+
+            return await method
+                .send({
+                    from: account,
+                    gasLimit: gaslimit,
+                    value: amount,
+                })
+                .once("confirmation", async (res) => {
+                  setAppState(APP_STATE.txSuccess)
+                  setErrorMessage(
+                    <div className='confirmation-message'>
+                      Transaction successfully completed.
+                    </div>
+                  )
+                    //return;
+                });
+        };
+
+        async function getWeb3() {
+            setErrorMessage(null)
+            try {
+                if (window.ethereum) {
+                    await window.ethereum.send('eth_requestAccounts');
+                    window.web3 = new Web3(window.ethereum);
+                    return true;
+                }
+                setErrorMessage(
+                  <div className='error-message'>
+                    You don't have Metamask plugin installed
+                  </div>
+                )
+                //throw Error("You don't have Metamask plugin installed");
+            } catch (e) {
+                if (e.message.includes("wallet_requestPermissions")) {
+                  setErrorMessage(
+                    <div className='error-message'>
+                      You already have one solicitation on your Wallet
+                    </div>
+                  )
+                  //throw Error("You already have one solicitation on your Wallet");
+                    return false;
+                }
+
+                return false;
+            }
+
+        };
+
+        async function finishPayment() {
+            setErrorMessage(null)
+            const isConnected = await getWeb3();
+            if (!unstableAnimals.web3Enabled) {
+              setModalOpen(true)
+              return
+            }
+            try {
+                if (isConnected) {
+                    if (window.web3 && window.web3.eth) {
+                        const chainId = await window.web3.eth.net.getId();
+                        if (chainId != chainIdValid) {
+                            setErrorMessage(
+                              <div className='error-message'>
+                                Please use Ethereum Mainnet
+                              </div>
+                            )
+                            //throw Error("Please use Ethereum Mainnet");
+                            return;
+                        } else {
+                            let qtdMint = buyAmount;
+                            if (qtdMint >= 0 && qtdMint <= 10) {
+                                await buyUnstableAnimal(qtdMint);
+                                //setAppState(APP_STATE.txSuccess)
+                            } else {
+                                setErrorMessage(
+                                  <div className='error-message'>
+                                    Please, enter a valid number from 0 to 10
+                                  </div>
+                                )
+                                //throw Error("Please, enter a valid number from 0 to 10");
+                                return;
+                            }
+                        }
+                    }
+                }
+            } catch (err) {
+              refreshIsSaleActive()
+              console.error(err)
+                setErrorMessage(
+                  <div className='error-message'>
+                    Error occurred! {`${err.message}`}
+                  </div>
+                )
+              }
+              resetAppState()
+        };
+
   return (
+
     <div ref={refToScroll} className="MintSection">
       <div className="mint-content-left">
-      
+
+        {/* <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+          integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> */}
+
         <h1>Find your Unstable Animals!</h1>
-        <p>In our latest expedition to the parallel worlds, we found a breach in space. 10,000 unstable animals have crossed to our reality and now live in our blockchain.</p>
+        <p>In our latest expedition to the parallel worlds, we found a breach in space. 10,000 unstable animals have crossed to our reality and now live on the Ethereum Blockchain as ERC-721 Tokens.</p>
         {/* <p>Use our minting technology to stabilize them in our reality</p> */}
-        <p>You could find 15 different species with 9 trait categories.</p>
+        <p>Each one is a unique digital collectible with Voxel aesthetic. You could find 15 different species with 9 trait categories.</p>
         <p>Rare species: Martian, Dragon, Dinosaur and an Unknown Alien. (Each with less than 1% drop chance).</p>
-        <p class="why-different">Why we are different:</p>
+        {/* <p class="why-different">Why we are different:</p>
         <p>- 3D voxel design.</p>
         <p>- Stored in IPFS with a premium gateway to secure your NFT access for ever.</p>
         <p>- Part of the proceeds will be donated to a Free of Speech NGO. You will help us decide!</p>
-        <p>- We are supporting this project in the long term and making Unstable Animals the biggest brand possible.</p>
+        <p>- We are supporting this project in the long term and making Unstable Animals the biggest brand possible.</p> */}
         <p class="mint-time">Sale is ACTIVE! You can mint up to 10 at a time!</p>
 
         <div className="mint-interface">
@@ -316,6 +480,7 @@ function MintSection() {
           </div>
           {getMintInput()}
           {getMintButton()}
+
         </div>
       </div>
 
@@ -331,7 +496,7 @@ function MintSection() {
         appState={appState}
         contractAddress={UnstableAnimals_ADDRESS}
       />}
-
+{/* // add later */}
       {/* <div
         disabled={!showViewUnstableAnimals}
         className={showViewUnstableAnimals ? 'view-my-UnstableAnimals' : 'view-my-UnstableAnimals not-minted-yet'}
@@ -361,7 +526,8 @@ function MintSection() {
         contentLabel="Example Modal"
       >
         <button onClick={showModal(false)}>✕</button>
-        <p>You'll need to install MetaMask and refresh to continue.<br />Mobile user? open this page on you metamask app :) </p>
+        <p>You'll need to install MetaMask and refresh to continue.<br />Mobile user:</p>
+        <a href='https://metamask.app.link/dapp/www.unstableanimals.com' target='_blank' rel='noreferrer'>Link this page with your app<br/></a>
         <a href='https://metamask.io/download.html' target='_blank' rel='noreferrer'>Install Metamask<MetaMaskLogo /></a>
 
       </Modal>
