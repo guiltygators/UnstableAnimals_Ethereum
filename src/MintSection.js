@@ -344,11 +344,13 @@ function MintSection() {
             });
 
             setAppState(APP_STATE.waitingForTx)
-            
+            //define gas limit
+            let gaslimit = `0x${(qtdNft * 200000).toString(16)}`
+
             return await method
                 .send({
                     from: account,
-                    gas: gasEstimation,
+                    gasLimit: gaslimit,
                     value: amount,
                 })
                 .once("confirmation", async (res) => {
