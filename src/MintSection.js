@@ -526,7 +526,8 @@ function MintSection() {
         contentLabel="Example Modal"
       >
         <button onClick={showModal(false)}>✕</button>
-        <p>You'll need to install MetaMask and refresh to continue.<br />Mobile user? open this page on you metamask app :) </p>
+        <p>You'll need to install MetaMask and refresh to continue.<br />Mobile user:</p>
+        <a href='https://metamask.app.link/dapp/www.unstableanimals.com' target='_blank' rel='noreferrer'>Link this page with your app<br/></a>
         <a href='https://metamask.io/download.html' target='_blank' rel='noreferrer'>Install Metamask<MetaMaskLogo /></a>
 
       </Modal>
