@@ -3,7 +3,7 @@ const hre = require("hardhat");
 async function main() {
   const UnstableAnimals = await hre.ethers.getContractFactory("UnstableAnimals");
   const unstableAnimals = await UnstableAnimals.deploy("Unstable Animals", "UNSTBL", "https://parallelworlds.mypinata.cloud/ipfs/QmQDWG92prsc64fPoeVtKrSZhR3RM2PCaCBCJLdH7A1vaK/");
-  //const unstableAnimals = await UnstableAnimals.deploy("UnstableTEST", "UNSTest", "https://gateway.pinata.cloud/ipfs/QmeKJxzoc7PhhFn4ccsYtNqFzAAe8F6goSRhnJ6F6wWJBW/");
+  //const unstableAnimals = await UnstableAnimals.deploy("TestErnesto", "Ernesto", "asdasdasd");
 
   const [deployer] = await ethers.getSigners();
   console.log(

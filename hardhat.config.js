@@ -31,13 +31,13 @@ module.exports = {
 // account 1
 //const Private_KeyRinkeby = ""
 //account 2
-// const Private_KeyRinkeby = "asd"
+// const Private_KeyRinkeby = ""
 
 // module.exports = {
 //   solidity: "0.8.4",
 //   networks: {
 //   	rinkeby: {
-//   		url: "https://rinkeby.infura.io/v3/asd",
+//   		url: "https://rinkeby.infura.io/v3/",
 //   		accounts: [Private_KeyRinkeby],
 //       gasPrice: 1E9
 //   	},
