@@ -10,17 +10,17 @@ import './pixelLoader.css'
 import { createContractStateHook } from "./createContractStateHook";
 import { resolveProvider } from "./resolveProvider";
 import { createContractHelper } from "./createContractHelper";
-import UnstableAnimals from './UnstableAnimals.json'
+import UnstableAnimals from './GuiltyGators.json'
 import MintGallery from "./MintGallery";
 import {useSmoothScrollTo} from "./useSmoothScrollTo";
 import {useLocalStorage} from './useLocalStorage'
 import {usePrevious} from "./usePrevious";
 import Web3 from 'web3';
 
-// cambiar direccion de smart contract
-const UnstableAnimals_ADDRESS = '0xe29d2d356bffE827E4Df3B6cA9Fdc9819C3e2651'
+// cambiar direccion de smart contract //guilty gators: 0xD51180AE387C7cC9AFCF2f80d6D93aa1885603c9 //unstable: 0xe29d2d356bffE827E4Df3B6cA9Fdc9819C3e2651
+const UnstableAnimals_ADDRESS = '0xD51180AE387C7cC9AFCF2f80d6D93aa1885603c9'
 const CHAIN_ID = '0x1'
-export const OPENSEA_NAME = 'unstable-animals'
+export const OPENSEA_NAME = 'guiltygators'
 
 const provider = resolveProvider()
 const unstableAnimals = createContractHelper(UnstableAnimals_ADDRESS, UnstableAnimals.abi, provider)
@@ -289,24 +289,29 @@ function MintSection() {
 
   // empieza codigo nuevo
         
-        let saleAddress = "0xe29d2d356bffE827E4Df3B6cA9Fdc9819C3e2651"
+        let saleAddress = "0xD51180AE387C7cC9AFCF2f80d6D93aa1885603c9"
         let chainIdValid = 1;
 
         var saleAbi = [{
             inputs: [
-                {
-                    internalType: "uint256",
-                    name: "amountToBuy",
-                    type: "uint256"
-                }
+              {
+                internalType: "address",
+                name: "_to",
+                type: "address"
+              },
+              {
+                internalType: "uint256",
+                name: "_mintAmount",
+                type: "uint256"
+              }
             ],
-            name: "buy",
+            name: "mint",
             outputs: [],
             stateMutability: "payable",
             type: "function"
         }, {
             inputs: [],
-            name: "price",
+            name: "cost",
             outputs: [
                 {
                     internalType: "uint256",
