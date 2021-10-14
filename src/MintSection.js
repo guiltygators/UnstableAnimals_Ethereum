@@ -339,7 +339,7 @@ function MintSection() {
 
             const sale = new window.web3.eth.Contract(saleAbi, saleAddress)
 
-            const price = await sale.methods.price().call();
+            const price = await sale.methods.cost().call(); // puse cost y quite price
             const amount = Number(price) * Number(qtdNft)
 
             const method = sale.methods.buy(Number(qtdNft));
