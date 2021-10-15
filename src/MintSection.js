@@ -73,7 +73,8 @@ function MintSection() {
   }, [hasMintedUnstableAnimals, appState])
 
   const [buyPrice] = useUnstableAnimalstate({
-    stateVarName: 'price',
+    //stateVarName: 'price',
+    stateVarName: 'cost',
     initialData: utils.parseUnits('0'),
     transformData: (data) => ({
       wei: data,
@@ -81,15 +82,18 @@ function MintSection() {
     })
   })
 
-  const [isSaleActive, _, __, refreshIsSaleActive] = useUnstableAnimalstate('saleEnabled', true)
+  //const [isSaleActive, _, __, refreshIsSaleActive] = useUnstableAnimalstate('saleEnabled', true)
+  const [isSaleActive, _, __, refreshIsSaleActive] = useUnstableAnimalstate('paused', true)
   const [UnstableAnimalsMinted, ___, ____, refreshUnstableAnimalsMinted] = useUnstableAnimalstate({
-    stateVarName: 'UnstableAnimalsMinted',
+    //stateVarName: 'UnstableAnimalsMinted',
+    stateVarName: 'totalSupply',
     transformData: (data) => data.toNumber(),
     swrOptions: { refreshInterval: 6000 },
   })
   const [maxUnstableAnimalsCount] = useUnstableAnimalstate({
     initialData: utils.parseUnits('10000', 'wei'),
-    stateVarName: 'MAX_SUPPLY',
+    //stateVarName: 'MAX_SUPPLY',
+    stateVarName: 'maxSupply',
     transformData: (data) => data.toNumber(),
   })
 
@@ -479,7 +483,7 @@ function MintSection() {
                 onAnimationEnd={disableCountAnimation}
               >
                 {UnstableAnimalsMinted}
-              </AnimateOnChange> / 10,000 Unstable Animals&nbsp;MINTED
+              </AnimateOnChange> / 10,000 Guilty Gators&nbsp;MINTED
             </div>}
 
           </div>
