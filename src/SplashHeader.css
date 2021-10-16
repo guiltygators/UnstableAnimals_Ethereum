@@ -1,8 +1,8 @@
 .SplashHeader {
-    background-image: url("images/collage_bg.png");
+    /* background-image: url("images/collage_bg.png");
     background-size: contain;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: fixed; */
     height: 100vh;
     max-height: 1000px;
     min-height: calc(5vw + 15vh + 442px + 350px);
@@ -60,37 +60,37 @@
     text-decoration:none;
     font-size: 24px;
     border-radius:10px;
-    border:solid 1px #28FF0D;
-    background:#28FF0D;
+    border:solid 1px #8bad5f;
+    background:#8bad5f;
     text-align:center;
     padding:16px 18px 14px;
     display: inline-block;
     margin-top: 70px;
-    color: #FF0DDF;
+    color: white;
     -webkit-transition: all 0.15s;
     -moz-transition: all 0.15s;
     transition: all 0.15s;
 
-    -webkit-box-shadow: 0px 6px 0px #FF0DDF;
-    -moz-box-shadow: 0px 6px 0px #FF0DDF;
-    box-shadow: 0px 6px 0px #FF0DDF;
+    -webkit-box-shadow: 0px 6px 0px white;
+    -moz-box-shadow: 0px 6px 0px white;
+    box-shadow: 0px 6px 0px white;
 }
 
 .button-1:active {
-    -webkit-box-shadow: 0px 2px 0px #28FF0D !important;
-    -moz-box-shadow: 0px 2px 0px #28FF0D !important;
-    box-shadow: 0px 2px 0px #28FF0D !important;
+    -webkit-box-shadow: 0px 2px 0px #8bad5f !important;
+    -moz-box-shadow: 0px 2px 0px #8bad5f !important;
+    box-shadow: 0px 2px 0px #8bad5f !important;
     margin-top: 74px;
     margin-bottom: -4px;
 }
 
 .button-1:hover {
-    border:solid 1px #FF0DDF;
-    background: #FF0DDF;
-    -webkit-box-shadow: 0px 6px 0px #28FF0D;
-    -moz-box-shadow: 0px 6px 0px #28FF0D;
-    box-shadow: 0px 6px 0px #28FF0D;
-    color: #28FF0D;
+    border:solid 1px white;
+    background: white;
+    -webkit-box-shadow: 0px 6px 0px #8bad5f;
+    -moz-box-shadow: 0px 6px 0px #8bad5f;
+    box-shadow: 0px 6px 0px #8bad5f;
+    color: #8bad5f;
 }
 
 .button-2 {
@@ -137,11 +137,11 @@
 }
 
 .social-icon svg:hover path {
-    fill: #28FF0D;
+    fill: #8bad5f;
 }
 
 .social-icon svg path {
-    fill: #FF0DDF;
+    fill: white;
 }
 
 .social-icon{

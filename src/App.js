@@ -11,7 +11,7 @@ function App() {
       <SplashHeader />
       <MintSection />
       <TimelineSection />
-      <TeamSection/>
+      {/* <TeamSection/> */}
       <FooterSection/>
     </div>
   )
