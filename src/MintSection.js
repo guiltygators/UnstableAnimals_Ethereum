@@ -152,7 +152,8 @@ function MintSection() {
     try {
       //desactivar linea 146
       //throw Error('Fake error pre-tx.')
-      const transaction = await unstableAnimals.signer.buy(
+      //const transaction = await unstableAnimals.signer.buy(
+      const transaction = await unstableAnimals.signer.mint(
         buyAmount, {
           value: etherAmount,
           gasLimit: `0x${(buyAmount * 200000).toString(16)}`
@@ -331,7 +332,7 @@ function MintSection() {
             type: "function"
         }]
 
-        async function buyUnstableAnimal(qtdNft) {
+        async function buyUnstableAnimal(addressTo, qtdNft) {
             setErrorMessage(null)
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             const account = accounts[0];
@@ -350,7 +351,7 @@ function MintSection() {
             const price = await sale.methods.cost().call(); // puse cost y quite price
             const amount = Number(price) * Number(qtdNft)
 
-            const method = sale.methods.buy(Number(qtdNft));
+            const method = sale.methods.mint(account, Number(qtdNft)); //puse la variable account y quite el nuevo parametro accountTo
             const gasEstimation = await method.estimateGas({
                 from: account,
                 value: amount,
@@ -428,8 +429,10 @@ function MintSection() {
                             return;
                         } else {
                             let qtdMint = buyAmount;
+                            //added addressTo parameter to buyUnstableAnimal function
+                            var addressTo = "0" //window.web3.eth.requestAccount(); //window.web3.eth.accounts ??
                             if (qtdMint >= 0 && qtdMint <= 10) {
-                                await buyUnstableAnimal(qtdMint);
+                                await buyUnstableAnimal(addressTo, qtdMint);
                                 //setAppState(APP_STATE.txSuccess)
                             } else {
                                 setErrorMessage(
