@@ -41,7 +41,7 @@ function TimelineSection() {
         <div class="container right">
             <div class="content">
                 <h2>50-100% Minted</h2>
-                <o>A Guilty Gator meta-verse will be open, more collaborations with different digital and non-digital artists, a shit-ton of giveaways back to the Gator community and the Guilty Gator takeover will begin. The rest of the Baby Guilty Gators will be released and given for free to all Gator holders (holders pay the gas). As technology expands in the NFT and blockchain space, The Guilty Gator team will find new ways and adapt to the current status quo of the NFT space. The Gators are here to stay for the long run. The Guilty Gators will exist for as long as they have existed on earth. All Gator holders will have first access to all future projects, exclusive NFT drops, and be able to help with community development.</o>
+                <p>A Guilty Gator meta-verse will be open, more collaborations with different digital and non-digital artists, a shit-ton of giveaways back to the Gator community and the Guilty Gator takeover will begin. The rest of the Baby Guilty Gators will be released and given for free to all Gator holders (holders pay the gas). As technology expands in the NFT and blockchain space, The Guilty Gator team will find new ways and adapt to the current status quo of the NFT space. The Gators are here to stay for the long run. The Guilty Gators will exist for as long as they have existed on earth. All Gator holders will have first access to all future projects, exclusive NFT drops, and be able to help with community development.</p>
                 </div>
         </div>
       </div>
