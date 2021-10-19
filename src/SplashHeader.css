@@ -5,7 +5,7 @@
     background-attachment: fixed; */
     height: 100vh;
     max-height: 1000px;
-    min-height: calc(5vw + 15vh + 442px + 350px);
+    min-height: calc(5vw + 15vh + 420px + 69px);
     background-position-y: calc(2vh - 2vw);
 }
 
@@ -96,12 +96,12 @@
 .button-2 {
     font-family: Bowlby One;
     /*width: auto;*/
-    color:#ffffff;
+    color:#8bad5f;
     text-decoration:none;
     font-size: 24px;
     border-radius:10px;
-    border:solid 1px #7843E6;
-    background:#7843E6;
+    border:solid 1px white;
+    background:white;
     text-align:center;
     padding:16px 18px 14px;
     display: inline-block;
@@ -111,25 +111,26 @@
     -moz-transition: all 0.15s;
     transition: all 0.15s;
 
-    -webkit-box-shadow: 0px 6px 0px #43AAE6;
-    -moz-box-shadow: 0px 6px 0px #43AAE6;
-    box-shadow: 0px 6px 0px #43AAE6;
+    -webkit-box-shadow: 0px 6px 0px #8bad5f;
+    -moz-box-shadow: 0px 6px 0px #8bad5f;
+    box-shadow: 0px 6px 0px #8bad5f;
 }
 
 .button-2:active{
-    -webkit-box-shadow: 0px 2px 0px #7843E6 !important;
-    -moz-box-shadow: 0px 2px 0px #7843E6 !important;
-    box-shadow: 0px 2px 0px #7843E6 !important;
+    -webkit-box-shadow: 0px 2px 0px white !important;
+    -moz-box-shadow: 0px 2px 0px white !important;
+    box-shadow: 0px 2px 0px white !important;
     margin-top: 44px;
     margin-bottom: -4px;
 }
 
 .button-2:hover {
-    border:solid 1px #43AAE6;
-    background: #43AAE6;
-    -webkit-box-shadow: 0px 6px 0px #7843E6;
-    -moz-box-shadow: 0px 6px 0px #7843E6;
-    box-shadow: 0px 6px 0px #7843E6;
+    border:solid 1px #8bad5f;
+    background: #8bad5f;
+    -webkit-box-shadow: 0px 6px 0px white;
+    -moz-box-shadow: 0px 6px 0px white;
+    box-shadow: 0px 6px 0px white;
+    color:white;
 }
 
 .social-icons {
