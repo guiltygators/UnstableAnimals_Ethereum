@@ -10,21 +10,20 @@ import './pixelLoader.css'
 import { createContractStateHook } from "./createContractStateHook";
 import { resolveProvider } from "./resolveProvider";
 import { createContractHelper } from "./createContractHelper";
-import UnstableAnimals from './GuiltyGators.json'
+import GuiltyGators from './GuiltyGators.json'
 import MintGallery from "./MintGallery";
 import {useSmoothScrollTo} from "./useSmoothScrollTo";
 import {useLocalStorage} from './useLocalStorage'
 import {usePrevious} from "./usePrevious";
 import Web3 from 'web3';
 
-// cambiar direccion de smart contract //guilty gators: 0xD51180AE387C7cC9AFCF2f80d6D93aa1885603c9 //unstable: 0xe29d2d356bffE827E4Df3B6cA9Fdc9819C3e2651
-const UnstableAnimals_ADDRESS = '0xD51180AE387C7cC9AFCF2f80d6D93aa1885603c9'
+const GuiltyGators_ADDRESS = '0xD51180AE387C7cC9AFCF2f80d6D93aa1885603c9'
 const CHAIN_ID = '0x1'
 export const OPENSEA_NAME = 'guiltygators'
 
 const provider = resolveProvider()
-const unstableAnimals = createContractHelper(UnstableAnimals_ADDRESS, UnstableAnimals.abi, provider)
-const useUnstableAnimalstate = createContractStateHook(unstableAnimals.reader)
+const guiltyGators = createContractHelper(GuiltyGators_ADDRESS, GuiltyGators.abi, provider)
+const useGuiltyGatorstate = createContractStateHook(guiltyGators.reader)
 
 export const APP_STATE = {
   readyToMint: 'READY_TO_MINT',
@@ -46,7 +45,7 @@ function wait(ms) {
 
 function MintSection() {
   const [buyAmount, setBuyAmountValue] = useState(1)
-  const [lastPurchasedUnstableAnimalsIds, setLastPurchasedUnstableAnimalsIds] = useState([])
+  const [lastPurchasedGuiltyGatorsIds, setLastPurchasedGuiltyGatorsIds] = useState([])
 // temporalmente comento esta linea (volverla a activar luego) la que dice ready to mint
   const [appState, setAppState] = useState(APP_STATE.readyToMint)
 
@@ -57,22 +56,22 @@ function MintSection() {
   const [modalIsOpen, setModalOpen] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
   const [shouldAnimateCount, setShouldAnimateCount] = useState(false)
-  const [hasMintedUnstableAnimals, setHasMintedUnstableAnimals] = useLocalStorage('hasMintedUnstableAnimals', false)
-  const [showViewUnstableAnimals, setShowViewUnstableAnimals] = useState(false)
+  const [hasMintedGuiltyGators, setHasMintedGuiltyGators] = useLocalStorage('hasMintedGuiltyGators', false)
+  const [showViewGuiltyGators, setShowViewGuiltyGators] = useState(false)
 
-  const loadedNoneMinted = useRef(hasMintedUnstableAnimals !== true)
+  const loadedNoneMinted = useRef(hasMintedGuiltyGators !== true)
 
   function disableCountAnimation() {
     setShouldAnimateCount(false)
   }
 
   useEffect(() => {
-    if (hasMintedUnstableAnimals && loadedNoneMinted.current !== hasMintedUnstableAnimals) {
-      setShowViewUnstableAnimals(true)
+    if (hasMintedGuiltyGators && loadedNoneMinted.current !== hasMintedGuiltyGators) {
+      setShowViewGuiltyGators(true)
     }
-  }, [hasMintedUnstableAnimals, appState])
+  }, [hasMintedGuiltyGators, appState])
 
-  const [buyPrice] = useUnstableAnimalstate({
+  const [buyPrice] = useGuiltyGatorstate({
     //stateVarName: 'price',
     stateVarName: 'cost',
     initialData: utils.parseUnits('0'),
@@ -82,36 +81,36 @@ function MintSection() {
     })
   })
 
-  //const [isSaleActive, _, __, refreshIsSaleActive] = useUnstableAnimalstate('saleEnabled', true)
-  const [isSaleActive, _, __, refreshIsSaleActive] = useUnstableAnimalstate('paused', true)
-  const [UnstableAnimalsMinted, ___, ____, refreshUnstableAnimalsMinted] = useUnstableAnimalstate({
-    //stateVarName: 'UnstableAnimalsMinted',
+  //const [isSaleActive, _, __, refreshIsSaleActive] = useGuiltyGatorstate('saleEnabled', true)
+  const [isSaleActive, _, __, refreshIsSaleActive] = useGuiltyGatorstate('paused', true)
+  const [GuiltyGatorsMinted, ___, ____, refreshGuiltyGatorsMinted] = useGuiltyGatorstate({
+    //stateVarName: 'GuiltyGatorsMinted',
     stateVarName: 'totalSupply',
     transformData: (data) => data.toNumber(),
     swrOptions: { refreshInterval: 6000 },
   })
-  const [maxUnstableAnimalsCount] = useUnstableAnimalstate({
+  const [maxGuiltyGatorsCount] = useGuiltyGatorstate({
     initialData: utils.parseUnits('10000', 'wei'),
     //stateVarName: 'MAX_SUPPLY',
     stateVarName: 'maxSupply',
     transformData: (data) => data.toNumber(),
   })
 
-  let allSold = maxUnstableAnimalsCount === UnstableAnimalsMinted
+  let allSold = maxGuiltyGatorsCount === GuiltyGatorsMinted
   if (!window.ethereum) {
     allSold = false
   }
 
-  const UnstableAnimalsMintedPrevious = usePrevious(UnstableAnimalsMinted)
+  const GuiltyGatorsMintedPrevious = usePrevious(GuiltyGatorsMinted)
   useEffect(() => {
     if (
-      UnstableAnimalsMinted !== undefined &&
-      UnstableAnimalsMintedPrevious !== undefined &&
-      UnstableAnimalsMinted !== UnstableAnimalsMintedPrevious
+      GuiltyGatorsMinted !== undefined &&
+      GuiltyGatorsMintedPrevious !== undefined &&
+      GuiltyGatorsMinted !== GuiltyGatorsMintedPrevious
     ) {
       setShouldAnimateCount(true)
     }
-  }, [UnstableAnimalsMinted, UnstableAnimalsMintedPrevious])
+  }, [GuiltyGatorsMinted, GuiltyGatorsMintedPrevious])
 
   useEffect(() => {
     if (!isSaleActive || allSold) {
@@ -136,9 +135,9 @@ function MintSection() {
     setAppState(APP_STATE.readyToMint)
   }
 
-  async function buyUnstableAnimals() {
+  async function buyGuiltyGators() {
     setErrorMessage(null)
-    if (!unstableAnimals.web3Enabled) {
+    if (!guiltyGators.web3Enabled) {
       // devolver a true para PRODUCCION
       setModalOpen(true)
       // desactivar error
@@ -152,8 +151,7 @@ function MintSection() {
     try {
       //desactivar linea 146
       //throw Error('Fake error pre-tx.')
-      //const transaction = await unstableAnimals.signer.buy(
-      const transaction = await unstableAnimals.signer.mint(
+      const transaction = await guiltyGators.signer.mint(
         buyAmount, {
           value: etherAmount,
           gasLimit: `0x${(buyAmount * 200000).toString(16)}`
@@ -162,18 +160,18 @@ function MintSection() {
       txHash = transaction.hash
       // throw Error('Fake error post-tx.')
       setAppState(APP_STATE.waitingForTx)
-      setLastPurchasedUnstableAnimalsIds([])
+      setLastPurchasedGuiltyGatorsIds([])
       // await wait(5000)
       await transaction.wait()
       setAppState(APP_STATE.txSuccess)
       const txReceipt = await provider.getTransactionReceipt(transaction.hash)
       const purchasedIds = txReceipt.logs
-        .map((log) => unstableAnimals.interface.parseLog(log))
+        .map((log) => guiltyGators.interface.parseLog(log))
         .filter((log) => log.name === 'Transfer')
         .map((log) => log.args.tokenId.toNumber())
-      setLastPurchasedUnstableAnimalsIds(purchasedIds)
-      setHasMintedUnstableAnimals(true)
-      await refreshUnstableAnimalsMinted()
+      setLastPurchasedGuiltyGatorsIds(purchasedIds)
+      setHasMintedGuiltyGators(true)
+      await refreshGuiltyGatorsMinted()
     } catch (err) {
       refreshIsSaleActive()
       console.error(err)
@@ -411,7 +409,7 @@ function MintSection() {
         async function finishPayment() {
             setErrorMessage(null)
             const isConnected = await getWeb3();
-            if (!unstableAnimals.web3Enabled) {
+            if (!guiltyGators.web3Enabled) {
               setModalOpen(true)
               return
             }
@@ -480,16 +478,16 @@ function MintSection() {
         {/* <p class="mint-time">Sale is ACTIVE! You can mint up to 10 at a time!</p> */}
 
         <div className="mint-interface">
-          <div className='UnstableAnimals-minted-wrapper'>
+          <div className='GuiltyGators-minted-wrapper'>
 
-            {UnstableAnimalsMinted !== undefined && <div className='UnstableAnimals-minted'>
+            {GuiltyGatorsMinted !== undefined && <div className='GuiltyGators-minted'>
               <AnimateOnChange
-                baseClassName='UnstableAnimals-minted-count'
-                animationClassName='UnstableAnimals-minted-count--flash'
+                baseClassName='GuiltyGators-minted-count'
+                animationClassName='GuiltyGators-minted-count--flash'
                 animate={shouldAnimateCount}
                 onAnimationEnd={disableCountAnimation}
               >
-                {UnstableAnimalsMinted}
+                {GuiltyGatorsMinted}
               </AnimateOnChange> / 10,000 Guilty Gators&nbsp;MINTED
             </div>}
 
@@ -508,31 +506,10 @@ function MintSection() {
 
       {!(appState === APP_STATE.soldOut) && <MintGallery
         buyAmount={buyAmount}
-        purchasedIds={lastPurchasedUnstableAnimalsIds}
+        purchasedIds={lastPurchasedGuiltyGatorsIds}
         appState={appState}
-        contractAddress={UnstableAnimals_ADDRESS}
+        contractAddress={GuiltyGators_ADDRESS}
       />}
-{/* // add later */}
-      {/* <div
-        disabled={!showViewUnstableAnimals}
-        className={showViewUnstableAnimals ? 'view-my-UnstableAnimals' : 'view-my-UnstableAnimals not-minted-yet'}
-      >
-        <p>View my UnstableAnimals on:</p>
-        <a
-          href={`https://opensea.io/${window.ethereum?.selectedAddress}/${OPENSEA_NAME}`}
-          target='_blank'
-          rel='noreferrer'
-        >
-          OpenSea
-        </a>
-        <a
-          href={`https://rarible.com/user/${window.ethereum?.selectedAddress}?tab=owned`}
-          target='_blank'
-          rel='noreferrer'
-        >
-          Rarible
-        </a>
-      </div> */}
 
       <Modal
         isOpen={modalIsOpen}
@@ -543,7 +520,7 @@ function MintSection() {
       >
         <button onClick={showModal(false)}>✕</button>
         <p>You'll need to install MetaMask and refresh to continue.<br />Mobile user:</p>
-        <a href='https://metamask.app.link/dapp/www.unstableanimals.com' target='_blank' rel='noreferrer'>Link this page with your app<br/></a>
+        <a href='https://metamask.app.link/dapp/www.GuiltyGators.com' target='_blank' rel='noreferrer'>Link this page with your app<br/></a>
         <a href='https://metamask.io/download.html' target='_blank' rel='noreferrer'>Install Metamask<MetaMaskLogo /></a>
 
       </Modal>
