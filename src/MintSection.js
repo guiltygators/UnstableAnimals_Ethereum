@@ -220,7 +220,7 @@ function MintSection() {
         </button>
 
       case APP_STATE.soldOut:
-         {/* <button onClick={finishPayment}>
+        {/* <button onClick={finishPayment}>
         <span className='mint-word' style={formattedEthAmount ? {float: 'left', marginLeft: 8} : {}}>Mint</span>
         {formattedEthAmount ? <span className='mint-price'>({formattedEthAmount})</span> : ''}
       </button>; */}
@@ -466,7 +466,7 @@ function MintSection() {
           integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> */}
 
         <h1>Welcome To The Guilty Gator’s Clubhouse!</h1>
-        <p>***(PRE-SALE WILL BE ANNOUNCED SHORTLY)***</p>
+        <p>***(PRE-SALE NOVEMBER 15th, 2021)***</p>
         {/* <p>Use our minting technology to stabilize them in our reality</p> */}
         <p>The Guilty Gators are a collection of 10,000 provably unique ERC-721 NFTs stored on the Ethereum Blockchain.</p>
         <p>Owning a Guilty Gator gives you access to the Guilty Gator Clubhouse which will be opened shortly after our pre-sale. The Guilty Gator Clubhouse will feature member-only benefits and perks only accessible to gator holders.</p>
