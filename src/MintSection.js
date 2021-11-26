@@ -220,16 +220,16 @@ function MintSection() {
         </button>
 
       case APP_STATE.soldOut:
-        {/* <button onClick={finishPayment}>
+        return <button onClick={finishPayment}>
         <span className='mint-word' style={formattedEthAmount ? {float: 'left', marginLeft: 8} : {}}>Mint</span>
         {formattedEthAmount ? <span className='mint-price'>({formattedEthAmount})</span> : ''}
-      </button>; */}
-        return <button
+    </button>; 
+       {/*<button
           className='sold-out'
           disabled={true}
         >
           <span className='mint-word'>Sale not started</span>
-        </button>
+      </button> */}
 
       default:
         return
