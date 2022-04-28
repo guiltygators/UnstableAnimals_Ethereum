@@ -228,7 +228,7 @@ function MintSection() {
           className='sold-out'
           disabled={true}
         >
-          <span className='mint-word'>Sale not started</span>
+          <span className='mint-word'>Sale not started yet</span>
       </button>
 
       default:
